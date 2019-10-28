@@ -1,4 +1,5 @@
-var apiProductos = "http://192.168.137.1:8080/FarmaciaApis/public/"
+// var apiProductos = "http://192.168.137.1:8080/FarmaciaApis/public/"
+var apiProductos = "http://localhost:8080/FarmaciaApis/public/"
 var urlApi = "";
 
 function GP_cargarTablaProductosBodega() {

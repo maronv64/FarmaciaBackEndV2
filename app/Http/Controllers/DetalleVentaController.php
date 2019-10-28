@@ -59,7 +59,7 @@ class DetalleVentaController extends Controller
                 $code = '200';
                 $message = 'OK';
 
-                $items = DetalleVenta::where([['estado_del','1'],['idcliente',$validad->id],['idproducto',$request->idproducto]])->first();
+                $items = DetalleVenta::with('producto')->where([['estado_del','1'],['idcliente',$validad->id],['idproducto',$request->idproducto]])->first();
                 $producto = Producto::where('id',$request->idproducto)->first();
 
 
@@ -77,6 +77,8 @@ class DetalleVentaController extends Controller
                   $items->estado_del = '1';
                   $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
                   $items->save();
+
+                  $items = DetalleVenta::with('producto')->where('id',$items->id)->first();
 
                   // $producto->cantidad -= $request->cantidad;
                   // $producto->update();
@@ -96,8 +98,8 @@ class DetalleVentaController extends Controller
 
                 }
 
-                $producto->cantidad -= $request->cantidad;
-                $producto->update();
+                // $producto->cantidad -= $request->cantidad;
+                // $producto->update();
 
 
               } catch (\Exception $e) {
@@ -145,7 +147,7 @@ class DetalleVentaController extends Controller
             } else {
 
                 $code = '200';
-                $items = DetalleVenta::where("nome_token",$request->nome_token)->first();
+                $items = DetalleVenta::with('producto')->where("nome_token",$request->nome_token)->first();
                 $message = 'OK';
 
             }
@@ -201,7 +203,7 @@ class DetalleVentaController extends Controller
             } else {
 
                 $code = '200';
-                $items = DetalleVenta::where("nome_token",$request->nome_token)->first();
+                $items = DetalleVenta::with('producto')->where("nome_token",$request->nome_token)->first();
                 $items->idventa = $request->idventa;
                 $items->idproducto = $request->idproducto;
                 // $items->fecha = $request->fecha;
@@ -252,7 +254,7 @@ class DetalleVentaController extends Controller
             } else {
 
                 $code = '200';
-                $items = DetalleVenta::where("nome_token",$request->nome_token)->first();
+                $items = DetalleVenta::with('producto')->where("nome_token",$request->nome_token)->first();
                 $items->estado_del='0';
                 $items->update();
                 $message = 'OK';
