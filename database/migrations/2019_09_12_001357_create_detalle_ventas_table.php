@@ -16,9 +16,10 @@ class CreateDetalleVentasTable extends Migration
         Schema::create('detalle_ventas', function (Blueprint $table) {
 
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('idventa');
+            $table->unsignedBigInteger('idventa')->nullable();
+            $table->unsignedBigInteger('idcliente');
             $table->unsignedBigInteger('idproducto');
-            $table->string('fecha');
+            // $table->string('fecha')->nullable();
             $table->string('precio_u');
             $table->string('cantidad');
             $table->string('subtotal');
@@ -27,6 +28,7 @@ class CreateDetalleVentasTable extends Migration
             $table->timestamps();
 
             $table->foreign('idventa')->references('id')->on('ventas');
+            $table->foreign('idcliente')->references('id')->on('users');
             $table->foreign('idproducto')->references('id')->on('productos');
         });
     }

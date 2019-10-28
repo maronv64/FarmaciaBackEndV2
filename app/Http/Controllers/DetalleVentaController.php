@@ -6,6 +6,7 @@ use App\DetalleVenta;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Str;
+use App\Producto;
 class DetalleVentaController extends Controller
 {
 
@@ -53,20 +54,55 @@ class DetalleVentaController extends Controller
                 //no existe ese usuarios o fue dado de baja.
             } else {
 
+              try {
+
                 $code = '200';
-
-                $items = new DetalleVenta();
-                $items->idventa = $request->idventa;
-                $items->idproducto = $request->idproducto;
-                $items->fecha = $request->fecha;
-                $items->precio_u = $request->precio_u;
-                $items->cantidad = $request->cantidad;
-                $items->subtotal = $request->subtotal;
-                $items->estado_del = '1';
-                $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
-                $items->save();
-
                 $message = 'OK';
+
+                $items = DetalleVenta::where([['estado_del','1'],['idcliente',$validad->id],['idproducto',$request->idproducto]])->first();
+                $producto = Producto::where('id',$request->idproducto)->first();
+
+
+                if (empty($items['idcliente'])) {
+                  // return response()->json('no existe todavia');
+                  $items = new DetalleVenta();
+                  $items->idventa = $request->idventa;  //se necesita
+                  $items->idcliente = $validad->id; //idcliente //
+                  $items->idproducto = $request->idproducto; //se necesita
+                  // $producto = Producto::find($request->idproducto);
+                  // $items->fecha = $request->fecha;
+                  $items->precio_u = $producto->precio;
+                  $items->cantidad = $request->cantidad; //se necesita
+                  $items->subtotal = $producto->precio*$request->cantidad;
+                  $items->estado_del = '1';
+                  $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
+                  $items->save();
+
+                  // $producto->cantidad -= $request->cantidad;
+                  // $producto->update();
+
+                }else{
+                  // return response()->json('si existe');
+
+                  $cantidadTotal = ($request->cantidad+$items->cantidad);
+
+                  $items->cantidad = $cantidadTotal;
+                  $items->precio_u = $producto->precio;
+                  $items->subtotal = $producto->precio*$cantidadTotal;
+                  $items->update();
+
+                  // $producto->cantidad -= $request->cantidad;
+                  // $producto->update();
+
+                }
+
+                $producto->cantidad -= $request->cantidad;
+                $producto->update();
+
+
+              } catch (\Exception $e) {
+
+              }
 
             }
 
@@ -168,7 +204,7 @@ class DetalleVentaController extends Controller
                 $items = DetalleVenta::where("nome_token",$request->nome_token)->first();
                 $items->idventa = $request->idventa;
                 $items->idproducto = $request->idproducto;
-                $items->fecha = $request->fecha;
+                // $items->fecha = $request->fecha;
                 $items->precio_u = $request->precio_u;
                 $items->cantidad = $request->cantidad;
                 $items->subtotal = $request->subtotal;
@@ -254,7 +290,7 @@ class DetalleVentaController extends Controller
             } else {
 
                 $code = '200';
-                $items = DetalleVenta::where([["estado_del","1"],["descripcion","like","%$request->value%"]])->get();
+                $items = DetalleVenta::with('producto')->where([["estado_del","1"],["idcliente","$validad->id"]])->get();
                 $message = 'OK';
 
             }

@@ -87,9 +87,13 @@ class ProductoController extends Controller
                     $items->presentacion =    $request['item']['producto']['presentacion'];
                     $items->medida =          $request['item']['producto']['medida'];
                     $items->concentracion =   $request['item']['producto']['concentracion'];
+                    $items->stock_unidad =    $request['item']['producto']['stock_unidad'];
+                    $items->stock_fraccion =  $request['item']['producto']['stock_fraccion'];
+                    $items->num_fraccion =    $request['item']['producto']['num_fraccion'];
                 //estado_item_bodega
                 $items->estado_item_bodega=   $request['estado_item_bodega']['codigo'];
                 //
+                $items->cantidad = $request['item']['producto']['stock_unidad']; //modificable...
                 $items->estado_del = '1';
                 $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
                 $items->save();
@@ -295,14 +299,14 @@ class ProductoController extends Controller
             } else {
 
                 $code = '200';
-                $items = Producto::where([["estado_del","1"],["descripcion","like","%$request->nome_token%"]])->get();
+                $items = Producto::where([["estado_del","1"],['cantidad','<>','0'],["descripcion","like","%$request->nome_token%"]])->get();
                 $message = 'OK';
 
             }
 
         }
 
-        $items = Producto::where('estado_del','1')->get();
+        $items = Producto::where([['estado_del','1'],['cantidad','>','0']])->get();
 
         $result =   array(
                         'items'     => $items,
