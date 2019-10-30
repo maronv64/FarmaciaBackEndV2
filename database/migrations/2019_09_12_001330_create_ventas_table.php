@@ -22,8 +22,8 @@ class CreateVentasTable extends Migration
             $table->unsignedBigInteger('idcourier')->nullable();
 
             $table->string('fecha');
-            $table->string('subtotal');
-            $table->string('total');
+            $table->string('subtotal')->nullable();
+            $table->string('total')->nullable();
 
             $table->string('estado_del','1')->default('1');
             $table->string('nome_token');

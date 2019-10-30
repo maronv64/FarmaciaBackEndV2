@@ -51,18 +51,19 @@ Route::put('/v0/estado_ventas_update/{nome_token_user?}/{data?}','EstadoVentaCon
 Route::delete('/v0/estado_ventas_delete/{nome_token_user?}/{data?}','EstadoVentaController@destroy')->name('api.v0.estado_ventas.delete');
 Route::get('/v0/estado_ventas_filtro/{nome_token_user?}/{data?}','EstadoVentaController@Filtro')->name('api.v0.estado_ventas.filtro');
 //VENTA
-Route::post('/v0/ventas_store/{nome_token_user?}/{data?}','VentaController@store')->name('api.v0.ventas.store');
+Route::post('/v0/ventas_store/{nome_token_user?}/{data?}','VentaController@store')->name('api.v0.ventas.store'); //paso uno de la venta
 Route::get('/v0/ventas_show/{nome_token_user?}/{data?}','VentaController@show')->name('api.v0.ventas.show');
 Route::put('/v0/ventas_update/{nome_token_user?}/{data?}','VentaController@update')->name('api.v0.ventas.update');
 Route::delete('/v0/ventas_delete/{nome_token_user?}/{data?}','VentaController@destroy')->name('api.v0.ventas.delete');
 Route::get('/v0/ventas_filtro/{nome_token_user?}/{data?}','VentaController@Filtro')->name('api.v0.ventas.filtro');
-Route::put('/v0/ventas_asignar_courier/{nome_token_user?}/{data?}','VentaController@asignarCourier')->name('api.v0.ventas.asignar');
+Route::put('/v0/ventas_asignar_courier/{nome_token_user?}/{data?}','VentaController@asignar_courier')->name('api.v0.ventas.asignar_courier'); //paso dos de la venta
 //DETALLE DE VENTAS
 Route::post('/v0/detalle_ventas_store/{nome_token_user?}/{data?}','DetalleVentaController@store')->name('api.v0.detalle_ventas.store');
 Route::get('/v0/detalle_ventas_show/{nome_token_user?}/{data?}','DetalleVentaController@show')->name('api.v0.detalle_ventas.show');
 Route::put('/v0/detalle_ventas_update/{nome_token_user?}/{data?}','DetalleVentaController@update')->name('api.v0.detalle_ventas.update');
 Route::delete('/v0/detalle_ventas_delete/{nome_token_user?}/{data?}','DetalleVentaController@destroy')->name('api.v0.detalle_ventas.delete');
 Route::get('/v0/detalle_ventas_filtro/{nome_token_user?}/{data?}','DetalleVentaController@Filtro')->name('api.v0.detalle_ventas.filtro');
+Route::post('/v0/detalle_ventas_asignar_venta/{nome_token_user?}/{data?}','DetalleVentaController@asignar_venta')->name('api.v0.detalle_ventas.asignar_venta');
 //PRODUCTOS
 Route::post('/v0/productos_store/{nome_token_user?}/{data?}','ProductoController@store')->name('api.v0.productos_ventas.store');
 Route::get('/v0/productos_show/{nome_token_user?}/{data?}','ProductoController@show')->name('api.v0.productos_ventas.show');

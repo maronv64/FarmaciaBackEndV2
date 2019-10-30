@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Venta;
 use App\DetalleVenta;
 use Illuminate\Http\Request;
 use App\User;
@@ -292,7 +293,8 @@ class DetalleVentaController extends Controller
             } else {
 
                 $code = '200';
-                $items = DetalleVenta::with('producto')->where([["estado_del","1"],["idcliente","$validad->id"]])->get();
+                //traer todos los registros de la tabla detalleventa que no tengan idventa, esto porque son items del carrito del usuario de la app
+                $items = DetalleVenta::with('producto')->where([["estado_del","1"],['idventa',null],["idcliente","$validad->id"]])->get();
                 $message = 'OK';
 
             }
@@ -307,5 +309,7 @@ class DetalleVentaController extends Controller
 
         return response()->json($result);
     }
+
+
 
 }
