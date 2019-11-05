@@ -1,9 +1,11 @@
-<strong>Lista de Usuarios</strong> <input type="text" id="filtroUsuarios">
+<strong>Lista de Usuarios</strong>
+ {{-- <input type="text" id="filtroUsuarios"> --}}
 <div class="table-responsive">
-  <table class="table table-sm">
+  {{-- <table class="table table-sm"> --}}
+  <table class="display" id="tablaUsuarios_padre" class="table table-sm">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        {{-- <th scope="col">#</th> --}}
         <th scope="col">Tipo</th>
         <th scope="col">Nombre</th>
         <th scope="col">Email</th>

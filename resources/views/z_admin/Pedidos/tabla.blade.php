@@ -1,8 +1,9 @@
 <strong>Lista Pedidos</strong>
-<input type="" name="" id="filtroPedidos">
-<input type="hidden" name="" id="pedido_nome_token" value="pedido_nome_token">
+{{-- <input type="" name="" id="filtroPedidos">
+<input type="hidden" name="" id="pedido_nome_token" value="pedido_nome_token"> --}}
 <div class="table-responsive">
-  <table class="table table-sm">
+  {{-- <table class="table table-sm"> --}}
+  <table class="display" id="tablaPedidos_padre">
     <thead> <!-- style="border: 1px solid #000000" -->
       <tr>
         <th scope="col">#</th>

@@ -290,50 +290,54 @@ class UserController extends Controller
     }
 
     // //filtro Courier
-    // public function FiltroCourier($nome_token_user='',Request $request)
-    // //public function Filtro($value='')
-    // {
-    //
-    //     // $tipo = TipoUsuario::where('cod','003')->first();
-    //     // $items = User::with('tipo')->where([["estado_del","1"],["idtipo","$tipo->id"],["name","like","%$request->value%"]])->orderBy('name', 'desc')->get();
-    //     // return response()->json($items);
-    //
-    //     $code='';
-    //     $message ='';
-    //     $items ='';
-    //
-    //     if (empty($nome_token_user)) {
-    //
-    //         $code='403';
-    //         $items = 'null';
-    //         $message = 'Forbidden: La solicitud fue legal, pero el servidor rehúsa responderla dado que el cliente no tiene los privilegios para hacerla. En contraste a una respuesta 401 No autorizado, la autenticación no haría la diferencia';
-    //
-    //     }else{
-    //
-    //         $validad = User::with('tipo')->where('nome_token',$nome_token_user)->first();
-    //
-    //         if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
-    //             //no existe ese usuarios o fue dado de baja.
-    //         } else {
-    //
-    //             $tipo = TipoUsuario::where('cod','003')->first(); //Courier
-    //
-    //             $code = '200';
-    //             $items = User::with('tipo')->where([["estado_del","1"],["idtipo","$tipo->id"],["name","like","%$request->value%"]])->orderBy('name', 'desc')->get();
-    //             $message = 'OK';
-    //
-    //         }
-    //
-    //     }
-    //
-    //     $result =   array(
-    //                     'items'     => $items,
-    //                     'code'      => $code,
-    //                     'message'   => $message
-    //                 );
-    //
-    //     return response()->json($result);
-    // }
+    public function FiltroCourier($nome_token_user='',Request $request)
+    //public function Filtro($value='')
+    {
+    
+        // $tipo = TipoUsuario::where('cod','003')->first();
+        // $items = User::with('tipo')->where([["estado_del","1"],["idtipo","$tipo->id"],["name","like","%$request->value%"]])->orderBy('name', 'desc')->get();
+        // return response()->json($items);
+    
+        $code='';
+        $message ='';
+        $items ='';
+    
+        if (empty($nome_token_user)) {
+    
+            $code='403';
+            $items = 'null';
+            $message = 'Forbidden: La solicitud fue legal, pero el servidor rehúsa responderla dado que el cliente no tiene los privilegios para hacerla. En contraste a una respuesta 401 No autorizado, la autenticación no haría la diferencia';
+    
+        }else{
+    
+            $validad = User::with('tipo')->where('nome_token',$nome_token_user)->first();
+    
+            if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
+                //no existe ese usuarios o fue dado de baja.
+            } else {
+                try {
+                    $tipo = TipoUsuario::where('cod','003')->first(); //Courier
+    
+                    $code = '200';
+                    $items = User::with('tipo')->where([["estado_del","1"],["idtipo","$tipo->id"],["name","like","%$request->value%"]])->orderBy('name', 'desc')->get();
+                    $message = 'OK';
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+               
+    
+            }
+    
+        }
+    
+        $result =   array(
+                        'items'     => $items,
+                        'code'      => $code,
+                        'message'   => $message
+                    );
+    
+        return response()->json($result);
+    }
 
     public function prueba()
     {

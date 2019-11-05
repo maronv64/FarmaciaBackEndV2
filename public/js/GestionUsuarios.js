@@ -58,7 +58,8 @@ function cargar_tablaUsuarios(value='') {
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
       //console.log(data);
-      crear_tablaUsuarios(data);
+      // crear_tablaUsuarios(data);
+      crear_tablaUsuarios(data.items);
     },
     error: function () {
         mensaje = "OCURRIO UN ERROR: Archivo->GestionUsuarios.js , funcion->cargar_tablaUsuarios()";
@@ -92,6 +93,79 @@ function crear_tablaUsuarios(data) {
 
     });
 
+}
+
+function crear_tablaUsuarios_2(data) {
+  $('#tablaUsuarios_padre').html('');
+  $('#tablaUsuarios').html('');
+  
+  $('#tablaUsuarios_padre').DataTable({
+/////////////////////////////////////////////////////////////////////////////////////
+      destroy: true,
+      order: [],
+      data: data,
+      'createdRow': function (row, data, dataIndex) {
+          // console.log(data);
+      },
+      'columnDefs': [
+          {
+             'targets': 3,
+             'data':'item.id_item',
+             'createdCell':  function (td, cellData, rowData, row, col) {
+                  // $(td).attr('id','nombreCurso'+row);
+                  // $(td).html('');
+                  // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
+                  // $(td).append(`<button type="button" class="btn btn-sm btn-outline-info">ver</button>`);
+                  // $(td).append('<button type="button" class="btn btn-sm btn-outline-secondary">Eliminar</button>');
+             },
+          }
+       ],
+      columns: [
+          {
+              title: ' TIPO',
+              data: 'item.cod_barra'
+          },
+          {
+              title: 'NOMBRE',
+              data: 'item.descripcion'
+          },
+          {
+            title: 'E-MAIL',
+            data: 'item.descripcion'
+          },
+          {
+            title: 'CÉDULA',
+            data: 'item.descripcion'
+          },
+          {
+            title: 'NOMBRE',
+            data: 'item.descripcion'
+          },
+          {
+              title: 'PRECIO',
+              data: null,
+              render: function ( data, type, row ) {
+                return "$ "+data.item.precio;
+              }
+          },
+          {
+              title: 'ACCIONES',
+              data: null,
+              render: function (data, type, row) {
+                var html = `
+                  <label class="switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
+                  <button type="button" class="btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})">ver</button>
+                `;
+                checkeds(data.id_item_bodega);
+
+                return `${html}`;
+                // return `<button>hola</button>`;
+
+              }
+          }
+      ],
+/////////////////////////////////////////////////////////////////////////////////////
+  });
 }
 
 function usuarios_eliminar(nome_token) {

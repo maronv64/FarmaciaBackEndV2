@@ -1,5 +1,5 @@
-// var apiProductos = "http://192.168.137.1:8080/FarmaciaApis/public/"
-var apiProductos = "http://localhost:8080/FarmaciaApis/public/"
+// // var apiProductos = "http://192.168.137.1:8080/FarmaciaApis/public/"
+// var apiProductos = "http://localhost:8080/FarmaciaApis/public/"
 var urlApi = "";
 
 function GP_cargarTablaProductosBodega() {
@@ -27,10 +27,32 @@ function GP_cargarTablaProductosBodega() {
   });
 }
 
+var listaProductos = [];
 function GP_cargarTablaProductosBodega_2() {
   $('#tablaProductosForanea').html('');
   $('#tablaProductosForanea_padre').html('');
+
+  
+
   $.get(`${apiProductos}api/v0/itemsBodega`,function (data) {
+    //console.log(data);
+    
+    // $.each(data,function (index,item) {
+    //   // debugger
+    //   console.log('contador',index);
+    //   //listaProductos.concat(item);
+    //    //console.log(item);
+    //   if (index===0) {
+    //     listaProductos = (item);
+    //     //console.log(listaProductos);
+    //   }
+    //    lista_productos.concat(item);
+    //    console.log(listaProductos);
+    // });
+
+    // console.log(listaProductos);
+    
+    
     $('#tablaProductosForanea_padre').DataTable({
 /////////////////////////////////////////////////////////////////////////////////////
       destroy: true,

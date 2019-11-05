@@ -1,3 +1,8 @@
+//Declaracion de variables globales...
+//-----------------------------------------------------------------------------------------
+// var apiProductos = "http://192.168.137.1:8080/FarmaciaApis/public/"
+var apiProductos = "http://localhost:8080/FarmaciaApis/public/"
+//-----------------------------------------------------------------------------------------
 $( document ).ready(function() {
     // $('#btnVerFrmTipoUsuarios').hide();
     // $('#btnVerFrmUsuarios').hide();
