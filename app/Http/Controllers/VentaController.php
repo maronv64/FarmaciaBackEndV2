@@ -8,6 +8,7 @@ use App\User;
 use App\EstadoVenta;
 use Illuminate\Support\Str;
 use App\DetalleVenta;
+use App\Producto;
 
 class VentaController extends Controller
 {
@@ -37,7 +38,7 @@ class VentaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($nome_token_user,Request $request) // la venta se genera inicialmente en solicitud (pedido) 
+    public function store($nome_token_user,Request $request) // la venta se genera inicialmente en solicitud (pedido)
     {
 
         $ignorar = array("/", ".", "$");
@@ -86,7 +87,7 @@ class VentaController extends Controller
                     $code = '418';
                     $message = 'I am a teapot';
                 }
-                
+
 
             }
 
@@ -338,7 +339,7 @@ class VentaController extends Controller
                 //return response()->json($estado);
                 $courier = User::where('nome_token',$request->nome_token_courier)->first();
                 $items->idcourier = $courier->id;
-  
+
                 $items->update();
                 $message = 'OK';
 
@@ -366,7 +367,7 @@ class VentaController extends Controller
         $code='';
         $message ='';
         $items ='';
-
+        // return response()->json($request);
         if (empty($nome_token_user)) {
 
             $code='403';
@@ -380,7 +381,7 @@ class VentaController extends Controller
             if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
                 //no existe ese usuarios o fue dado de baja.
             } else {
-                
+
                 try {
                     //buscar la venta con el token enviado desde la app
                     $venta = Venta::where("nome_token",$request->nome_token)->first();
@@ -388,17 +389,29 @@ class VentaController extends Controller
                     $code = '200';
                     $message = 'OK';
                     //se buscan todos los registros de la tabla detalle venta que encajen el la idea de carrito
-                    $items = DetalleVenta::with('producto')->where([["estado_del","1"],['idventa',null],["idcliente","$validad->id"]])->get();
-                    //se realiza un recorrido a a los registros de la tabla para actualizarlos con el id de venta 
-                    foreach ($items as $key => $item) {
-                        $item->idventa=$venta->idventa;
+                    $detalles = DetalleVenta::with('producto')->where([["estado_del","1"],['idventa',null],["idcliente","$validad->id"]])->get();
+                    //se realiza un recorrido a a los registros de la tabla para actualizarlos con el id de venta
+                    $suma=0;
+                    foreach ($detalles as $key => $item) {
+                        $item->idventa=$venta->id;
+                        //actualizar la cantidad de productos existentes...
+                        $producto=Producto::where('id',$item->idproducto)->first();
+                        $producto->cantidad=$producto->cantidad - $item->cantidad;
+                        $producto->update();
+                        //
                         $item->update();
+                        $suma+=$item->subtotal;
                     }
+                    $venta->subtotal = $suma;
+                    $venta->total = $suma;
+                    $venta->update();
+                    $items = Venta::with('estado','cliente','courier','detalle')->where("nome_token",$venta->nome_token)->first();
+
                 } catch (\Throwable $th) {
                     $code = '418';
                     $message = 'I am a teapot';
                 }
-               
+
             }
 
         }
@@ -412,6 +425,10 @@ class VentaController extends Controller
         return response()->json($result);
     }
 
-
+    public function prueba()
+    {
+      $detalles = DetalleVenta::with('producto')->where([["estado_del","1"],['idventa',null],["idcliente","1"]])->get();
+      return response()->json($detalles);
+    }
 
 }

@@ -25,6 +25,6 @@ class Venta extends Model
     public function detalle()
     {
     	# code...
-    	return $this->hasMany('App\DetalleVenta','idventa','id')->with('producto');
-    }    
+    	return $this->hasMany('App\DetalleVenta','idventa','id')->with('producto')->where('estado_del','1');
+    }
 }

@@ -67,7 +67,7 @@ class DetalleVentaController extends Controller
                 if (empty($items['idcliente'])) {
                   // return response()->json('no existe todavia');
                   $items = new DetalleVenta();
-                  $items->idventa = $request->idventa;  //se necesita
+                  // $items->idventa = $request->idventa;  //se necesita
                   $items->idcliente = $validad->id; //idcliente //
                   $items->idproducto = $request->idproducto; //se necesita
                   // $producto = Producto::find($request->idproducto);
