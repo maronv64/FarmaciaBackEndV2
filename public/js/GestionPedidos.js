@@ -241,7 +241,9 @@ function pedidos_asignarCourier(nome_token) {
 		    success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
 		    {
 					//swal(data);
-		      //console.log(data);
+          //console.log(data);
+          console.log(data);
+          
 		    	cargar_tablaPedidos('');
 					$(".frmCourier_modal").modal("hide");
 		    },

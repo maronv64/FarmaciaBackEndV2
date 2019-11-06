@@ -1,7 +1,7 @@
 
 <strong>Lista de Roles de Usuarios</strong>
 <div class="">
-  <table id="tablaTipoUsuariosPadre" class="table table-sm display">
+  <table id="tablaTipoUsuarios_padre" class="display">
     <thead>
       <tr>
         <th scope="col">#</th>

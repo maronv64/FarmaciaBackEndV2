@@ -310,7 +310,7 @@ class VentaController extends Controller
     {
       //return response()->json('hola');
       // // code...
-      // //return response()->json($request);
+      //return response()->json($request);
       $code='';
       $message ='';
       $items ='';

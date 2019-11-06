@@ -24,7 +24,7 @@ function cargar_tablaTipoUsuarios(value='') {
         success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
         {
         	//console.log(data);
-           	crear_tablaTipoUsuarios(data);
+           	crear_tablaTipoUsuarios_v2(data.items);
         },
         error: function () {
             mensaje = "OCURRIO UN ERROR : Archivo->GestionTipoUsuarios.js , funcion->cargar_tablaTipoUsuarios()";
@@ -55,7 +55,61 @@ function crear_tablaTipoUsuarios(data) {
    	});
 
 }
+function crear_tablaTipoUsuarios_v2(data) {
+  $('#tablaTipoUsuarios_padre').html('');
+  $('#tablaTipoUsuarios').html('');
+  
+  $('#tablaTipoUsuarios_padre').DataTable({
+/////////////////////////////////////////////////////////////////////////////////////
+      destroy: true,
+      order: [],
+      data: data,
+      'createdRow': function (row, data, dataIndex) {
+          // console.log(data);
+      },
+      'columnDefs': [
+          {
+             'targets': 0,
+             'data':'id',
+             'createdCell':  function (td, cellData, rowData, row, col) {
+                  // $(td).attr('id','nombreCurso'+row);
+                  // $(td).html('');
+                  // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
+                  // $(td).append(`<button type="button" class="btn btn-sm btn-outline-info">ver</button>`);
+                  // $(td).append('<button type="button" class="btn btn-sm btn-outline-secondary">Eliminar</button>');
+             },
+          }
+       ],
+      columns: [
+          // {
+          //   title: ' TIPO',
+          //   data: null,
+          //   render: function (data, type, row) {
+          //     return "<p>wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww</p>";
+          //   }
+          // },
+          {
+              title: ' TIPO',
+              data: 'descripcion'
+          },
+          {
+              title: 'ACCIONES',
+              data: null,
+              render: function (data, type, row) {
+                var html = `
+                <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}')" data-toggle="modal" >Modificar</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${data.nome_token}')">Eliminar</button>
+                `;
 
+                return `${html}`;
+                // return `<button>hola</button>`;
+
+              }
+          }
+      ],
+/////////////////////////////////////////////////////////////////////////////////////
+  });
+}
 function tipo_usuarios_ver(nome_token) {
 
   //var descripcion = $(`.fila_${nome_token}`).find("td").eq(0).text();
@@ -209,13 +263,4 @@ $('#frmTipoUsuarios').on('submit',function (e) {
 
 });
 
-function crear_tablaTipoUsuariosPadre(_data) {
-	$('#tablaTipoUsuariosPadre').DataTable( {
-	    data: _data.items,
-	    columns: [
-	        { data: 'id' },
-	        { data: 'descripcion' },
-	        { data: 'cod' },
-	    ]
-	} );
-}
+

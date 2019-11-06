@@ -28,30 +28,13 @@ function GP_cargarTablaProductosBodega() {
 }
 
 var listaProductos = [];
-function GP_cargarTablaProductosBodega_2() {
+function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
   $('#tablaProductosForanea').html('');
   $('#tablaProductosForanea_padre').html('');
 
   
 
-  $.get(`${apiProductos}api/v0/itemsBodega`,function (data) {
-    //console.log(data);
-    
-    // $.each(data,function (index,item) {
-    //   // debugger
-    //   console.log('contador',index);
-    //   //listaProductos.concat(item);
-    //    //console.log(item);
-    //   if (index===0) {
-    //     listaProductos = (item);
-    //     //console.log(listaProductos);
-    //   }
-    //    lista_productos.concat(item);
-    //    console.log(listaProductos);
-    // });
-
-    // console.log(listaProductos);
-    
+  $.get(`${apiProductos}api/v0/itemsBodega/${last}/${filtro}`,function (data) {
     
     $('#tablaProductosForanea_padre').DataTable({
 /////////////////////////////////////////////////////////////////////////////////////
@@ -89,6 +72,10 @@ function GP_cargarTablaProductosBodega_2() {
               render: function ( data, type, row ) {
                 return "$ "+data.item.precio;
               }
+          },
+          {
+            title: 'STOCK',
+            data: 'stock_unidad',
           },
           {
               title: 'ACCIONES',

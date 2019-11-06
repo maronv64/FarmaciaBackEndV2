@@ -60,44 +60,71 @@ class DetalleVentaController extends Controller
                 $code = '200';
                 $message = 'OK';
 
-                $items = DetalleVenta::with('producto')->where([['estado_del','1'],['idcliente',$validad->id],['idproducto',$request->idproducto]])->first();
+                $items = DetalleVenta::with('producto')->where([['estado_del','1'],['idventa',null],['idcliente',$validad->id],['idproducto',$request->idproducto]])->first();
                 $producto = Producto::where('id',$request->idproducto)->first();
 
 
-                if (empty($items['idcliente'])) {
-                  // return response()->json('no existe todavia');
-                  $items = new DetalleVenta();
-                  // $items->idventa = $request->idventa;  //se necesita
-                  $items->idcliente = $validad->id; //idcliente //
-                  $items->idproducto = $request->idproducto; //se necesita
-                  // $producto = Producto::find($request->idproducto);
-                  // $items->fecha = $request->fecha;
-                  $items->precio_u = $producto->precio;
-                  $items->cantidad = $request->cantidad; //se necesita
-                  $items->subtotal = $producto->precio*$request->cantidad;
-                  $items->estado_del = '1';
-                  $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
-                  $items->save();
-
-                  $items = DetalleVenta::with('producto')->where('id',$items->id)->first();
-
-                  // $producto->cantidad -= $request->cantidad;
-                  // $producto->update();
-
+                if (empty($items['idproducto'])) {
+                    $items = new DetalleVenta();
+                    $items->idcliente = $validad->id; //idcliente //
+                    $items->idproducto = $request->idproducto; //se necesita
+                    // $items->fecha = $request->fecha;
+                    $items->precio_u = $producto->precio;
+                    $items->cantidad = $request->cantidad; //se necesita
+                    $items->subtotal = $producto->precio*$request->cantidad;
+                    $items->estado_del = '1';
+                    $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
+                    $items->save();
+   
+                    $items = DetalleVenta::with('producto')->where('id',$items->id)->first();
                 }else{
-                  // return response()->json('si existe');
+                    $cantidadTotal = ($request->cantidad+$items->cantidad);
 
-                  $cantidadTotal = ($request->cantidad+$items->cantidad);
-
-                  $items->cantidad = $cantidadTotal;
-                  $items->precio_u = $producto->precio;
-                  $items->subtotal = $producto->precio*$cantidadTotal;
-                  $items->update();
-
-                  // $producto->cantidad -= $request->cantidad;
-                  // $producto->update();
-
+                    $items->cantidad = $cantidadTotal;
+                    $items->precio_u = $producto->precio;
+                    $items->subtotal = $producto->precio*$cantidadTotal;
+                    $items->update();
                 }
+
+                
+
+                // if (empty($items['idventa']) ){
+
+
+
+                //   // return response()->json('no existe todavia');
+                //   $items = new DetalleVenta();
+                //   // $items->idventa = $request->idventa;  //se necesita
+                //   $items->idcliente = $validad->id; //idcliente //
+                //   $items->idproducto = $request->idproducto; //se necesita
+                //   // $producto = Producto::find($request->idproducto);
+                //   // $items->fecha = $request->fecha;
+                //   $items->precio_u = $producto->precio;
+                //   $items->cantidad = $request->cantidad; //se necesita
+                //   $items->subtotal = $producto->precio*$request->cantidad;
+                //   $items->estado_del = '1';
+                //   $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
+                //   $items->save();
+
+                //   $items = DetalleVenta::with('producto')->where('id',$items->id)->first();
+
+                //   // $producto->cantidad -= $request->cantidad;
+                //   // $producto->update();
+
+                // }else{
+                //   // return response()->json('si existe');
+
+                //   $cantidadTotal = ($request->cantidad+$items->cantidad);
+
+                //   $items->cantidad = $cantidadTotal;
+                //   $items->precio_u = $producto->precio;
+                //   $items->subtotal = $producto->precio*$cantidadTotal;
+                //   $items->update();
+
+                //   // $producto->cantidad -= $request->cantidad;
+                //   // $producto->update();
+
+                // }
 
                 // $producto->cantidad -= $request->cantidad;
                 // $producto->update();

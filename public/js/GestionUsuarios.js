@@ -59,7 +59,7 @@ function cargar_tablaUsuarios(value='') {
     {
       //console.log(data);
       // crear_tablaUsuarios(data);
-      crear_tablaUsuarios(data.items);
+      crear_tablaUsuarios_2(data.items);
     },
     error: function () {
         mensaje = "OCURRIO UN ERROR: Archivo->GestionUsuarios.js , funcion->cargar_tablaUsuarios()";
@@ -123,40 +123,32 @@ function crear_tablaUsuarios_2(data) {
       columns: [
           {
               title: ' TIPO',
-              data: 'item.cod_barra'
+              data: 'tipo.descripcion'
           },
           {
               title: 'NOMBRE',
-              data: 'item.descripcion'
+              data: 'name'
           },
           {
             title: 'E-MAIL',
-            data: 'item.descripcion'
+            data: 'email'
           },
           {
             title: 'CÉDULA',
-            data: 'item.descripcion'
+            data: 'cedula'
           },
           {
-            title: 'NOMBRE',
-            data: 'item.descripcion'
-          },
-          {
-              title: 'PRECIO',
-              data: null,
-              render: function ( data, type, row ) {
-                return "$ "+data.item.precio;
-              }
+            title: 'CELULAR',
+            data: 'celular'
           },
           {
               title: 'ACCIONES',
               data: null,
               render: function (data, type, row) {
                 var html = `
-                  <label class="switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
-                  <button type="button" class="btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})">ver</button>
+                  <button type="button" class="btn btn-sm btn-outline-info" onclick="usuarios_ver('${data.nome_token}')" data-toggle="modal" >Modificar</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="usuarios_eliminar('${data.nome_token}')">Eliminar</button>
                 `;
-                checkeds(data.id_item_bodega);
 
                 return `${html}`;
                 // return `<button>hola</button>`;
