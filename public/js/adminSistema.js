@@ -92,7 +92,7 @@ $('#btnVerFrmProductos').click(function (e) {
   // puto();
   // GP_cargarTablaProductosApp();
   GP_cargar_lista_productos('');
-  GP_cargarTablaProductosBodega_2();
+  GP_cargarTablaProductosBodega_2(0,'');
 	$('#cardProductos').show();
 	//cargar_frm_ventas();
 });

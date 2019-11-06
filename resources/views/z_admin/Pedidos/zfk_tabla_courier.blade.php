@@ -1,10 +1,11 @@
 <!--tabla_foranea.blade.php -->
-<strong>Lista de Tranportistas</strong> <input type="text" id="filtroUsuarios">
+<strong>Lista de Tranportistas</strong>
+ {{-- <input type="text" id="filtroUsuarios"> --}}
 <div class="table-responsive">
-  <table class="table table-sm">
+  <table id="tablaCouriers_padre" class="display" style="width: 100%!important;">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        {{-- <th scope="col">#</th> --}}
         <th scope="col">Tipo</th>
         <th scope="col">Nombre</th>
         <th scope="col">Email</th>

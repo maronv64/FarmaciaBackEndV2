@@ -1,10 +1,10 @@
 <strong>Lista de Ventas</strong>
-<input type="text" name="" value="" id="filtroVentas">
+{{-- <input type="text" name="" value="" id="filtroVentas"> --}}
 <div class="table-responsive">
-  <table class="table table-sm">
+  <table id="tablaVentas_padre" class="display">
     <thead> <!-- style="border: 1px solid #000000" -->
       <tr>
-        <th scope="col">#</th>
+        {{-- <th scope="col">#</th> --}}
         <th scope="col">Fecha</th>
         <th scope="col">Cliente</th>
         <th scope="col">Transporte</th>

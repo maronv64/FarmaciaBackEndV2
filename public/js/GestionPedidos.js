@@ -131,9 +131,6 @@ function GP_crearTablaPedidos_2(data) {
   //});
 }
 
-
-
-
 function pedidos_ver(nome_token) {
 	// body...
 	///swal('pedidos_ver');
@@ -172,7 +169,8 @@ function cargar_tablaCouriers(value='') {
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
       //console.log(data);
-        crear_tablaCouriers(data);
+        // crear_tablaCouriers(data);
+        crear_tablaCouriers_v2(data.items);
     },
     error: function () {
         mensaje = "OCURRIO UN ERROR: archivo->GestionPedidos.js , función->cargar_tablaCouriers()";
@@ -207,6 +205,74 @@ function crear_tablaCouriers(data) {
     });
 
 }
+
+function crear_tablaCouriers_v2(data) {
+    // debugger
+    $('#tablaCouriers').html('');
+    $('#tablaCouriers_padre').html('');
+    //$.get(`${apiProductos}api/v0/itemsBodega`,function (data) {
+      $('#tablaCouriers_padre').DataTable({
+  /////////////////////////////////////////////////////////////////////////////////////
+        destroy: true,
+        order: [],
+        data: data,
+        'createdRow': function (row, data, dataIndex) {
+            // console.log(data);
+        },
+        'columnDefs': [
+            {
+               'targets': 3,
+               'data':'id',
+               'createdCell':  function (td, cellData, rowData, row, col) {
+                    // $(td).attr('id','nombreCurso'+row);
+                    // $(td).html('');
+                    // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
+                    // $(td).append(`<button type="button" class="btn btn-sm btn-outline-info">ver</button>`);
+                    // $(td).append('<button type="button" class="btn btn-sm btn-outline-secondary">Eliminar</button>');
+               },
+            }
+         ],
+        columns: [
+            {
+                title: 'TIPO',
+                data: 'tipo.descripcion'
+            },
+            {
+                title: 'NOMBRE',
+                data: 'name'
+            },
+            {
+              title: 'E-MAIL',
+              data: 'email'
+            },
+            {
+              title: 'CÉDULA',
+              data: 'cedula'
+            },
+            {
+              title: 'CELULAR',
+              data: 'celular'
+            },
+            {
+                title: 'ACCIONES',
+                data: null,
+                render: function (data, type, row) {
+  
+                  var html = `
+                    <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" onclick="pedidos_asignarCourier('${data.nome_token}')">Asignar</button>
+                  `;
+  
+                  return `${html}`;
+                  // return `<button>hola</button>`;
+  
+                }
+            }
+        ],
+  /////////////////////////////////////////////////////////////////////////////////////
+      });
+    //});
+}
+
 function pedidos_asignarCourier(nome_token) {
   //swal(nome_token);
 	$("#fk_courier_nome_token").val(nome_token);

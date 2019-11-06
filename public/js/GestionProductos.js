@@ -27,14 +27,43 @@ function GP_cargarTablaProductosBodega() {
   });
 }
 
-var listaProductos = [];
 function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
+  var FrmData=
+	{
+		value: filtro,
+	}
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+// debugger
+  $.ajax({
+      url: 'http://localhost:8080/FarmaciaApis/public/api/v0/itemsBodegaFiltro/'+last+'/'+FrmData,// Url que se envia para la solicitud esta en el web php es la ruta
+      method: "GET",             // Tipo de solicitud que se enviará, llamado como método
+      data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+      success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+      {
+        //console.log(data);
+        
+        GP_crearTablaProductosBodega_v2(data);
+      },
+      error: function (error) {
+        console.log(error);
+        
+          mensaje = "OCURRIO UN ERROR : Archivo->GestionProductos.js , funcion->GP_cargarTablaProductosBodega_2()";
+          swal(mensaje);
+      }
+  });
+
+}
+
+var listaProductos = [];
+function GP_crearTablaProductosBodega_v2(data) {
   $('#tablaProductosForanea').html('');
   $('#tablaProductosForanea_padre').html('');
 
-  
-
-  $.get(`${apiProductos}api/v0/itemsBodega/${last}/${filtro}`,function (data) {
+  // $.get(`${apiProductos}api/v0/itemsBodega/`+last+`/`+filtro,function (data) {
     
     $('#tablaProductosForanea_padre').DataTable({
 /////////////////////////////////////////////////////////////////////////////////////
@@ -95,7 +124,7 @@ function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
       ],
 /////////////////////////////////////////////////////////////////////////////////////
     });
-  });
+  // });
 }
 
 function GP_escoger_producto(id_foraneo) {

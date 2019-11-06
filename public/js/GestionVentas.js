@@ -23,7 +23,8 @@ function cargar_tablaVentas(value='') {
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
       	//console.log(data);
-        crear_tablaVentas(data);
+        // crear_tablaVentas(data);
+        crear_tablaVentas_v2(data.items);
     },
     error: function () {
         mensaje = "OCURRIO UN ERROR: Archivo->GestionUsuarios.js , funcion->cargar_tablaVentas()";
@@ -59,6 +60,80 @@ function crear_tablaVentas(data) {
 
 	});
 
+}
+
+function crear_tablaVentas_v2(data) {
+    // debugger
+    $('#tablaVentas').html('');
+    $('#tablaVentas_padre').html('');
+    //$.get(`${apiProductos}api/v0/itemsBodega`,function (data) {
+      $('#tablaVentas_padre').DataTable({
+  /////////////////////////////////////////////////////////////////////////////////////
+        destroy: true,
+        order: [],
+        data: data,
+        'createdRow': function (row, data, dataIndex) {
+            // console.log(data);
+        },
+        'columnDefs': [
+            {
+               'targets': 3,
+               'data':'id',
+               'createdCell':  function (td, cellData, rowData, row, col) {
+                    // $(td).attr('id','nombreCurso'+row);
+                    // $(td).html('');
+                    // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
+                    // $(td).append(`<button type="button" class="btn btn-sm btn-outline-info">ver</button>`);
+                    // $(td).append('<button type="button" class="btn btn-sm btn-outline-secondary">Eliminar</button>');
+               },
+            }
+         ],
+        columns: [
+            {
+              title: 'FECHA',
+              data: 'fecha'
+            },
+            {
+              title: 'CLIENTE',
+              data: 'cliente.name'
+            },
+            {
+              title: 'TRANSPORTE',
+              data: 'courier.name',
+                
+            },
+            {
+              title: 'TOTAL',
+              data: null,
+              render:function (data, type, row) {
+                var html = `$ ${data.total}`;
+  
+                  return `${html}`;
+              }
+            },
+            {
+              title: 'ESTADO',
+              data: 'estado.descripcion',
+            },
+            {
+                title: 'ACCIONES',
+                data: null,
+                render: function (data, type, row) {
+  
+                  var html = `
+                    <button type="button" class="btn btn-sm btn-outline-info" onclick="ventas_ver('${data.nome_token}')" data-toggle="modal" >Modificar</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="ventas_eliminar('${data.nome_token}')">Eliminar</button>
+                  `;
+  
+                  return `${html}`;
+                  // return `<button>hola</button>`;
+  
+                }
+            }
+        ],
+  /////////////////////////////////////////////////////////////////////////////////////
+      });
+    //});
 }
 
 //filtro de ventas
