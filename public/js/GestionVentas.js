@@ -22,7 +22,7 @@ function cargar_tablaVentas(value='') {
     data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
-      	//console.log(data);
+
         // crear_tablaVentas(data);
         crear_tablaVentas_v2(data.items);
     },
@@ -37,7 +37,7 @@ function crear_tablaVentas(data) {
 	//swal('hola');
   	$('#tablaVentas').html('');
 
-    //console.log(data);
+
 	$.each(data.items, function(a, item) { // recorremos cada uno de los datos que retorna el objero json n valores
 
 	  var fila="";
@@ -55,7 +55,7 @@ function crear_tablaVentas(data) {
 	        </td>
 	    </tr>
 	  `;
-	    //console.log(item);
+	   
 	    $('#tablaVentas').append(fila);
 
 	});
@@ -73,13 +73,15 @@ function crear_tablaVentas_v2(data) {
         order: [],
         data: data,
         'createdRow': function (row, data, dataIndex) {
-            // console.log(data);
+            // 
         },
         'columnDefs': [
             {
                'targets': 3,
                'data':'id',
                'createdCell':  function (td, cellData, rowData, row, col) {
+                  // console.log(rowData);
+                  
                     // $(td).attr('id','nombreCurso'+row);
                     // $(td).html('');
                     // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
@@ -121,8 +123,8 @@ function crear_tablaVentas_v2(data) {
                 render: function (data, type, row) {
   
                   var html = `
-                    <button type="button" class="btn btn-sm btn-outline-info" onclick="ventas_ver('${data.nome_token}')" data-toggle="modal" >Modificar</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="ventas_eliminar('${data.nome_token}')">Eliminar</button>
+                    <button type="button" class="btn btn-sm btn-outline-info" onclick="ventas_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="ventas_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                   `;
   
                   return `${html}`;

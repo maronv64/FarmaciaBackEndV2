@@ -13,7 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/sweetalert.min.js') }}" defer></script>
     <script src="{{ asset('js/jquery.dataTables.js') }}" defer></script>
-    <script src="{{ asset('js/jquery.dataTables.js') }}" defer></script>
+    <script src="{{ asset('js/adminSistema.js') }}" defer></script>
     {{--<script src="{{ asset('js/bootstrap-toggle.js') }}" defer></script>--}}
 
     <!-- Fonts -->
@@ -25,6 +25,7 @@
     <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/bootstrap-toggle.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/w3school-toggle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 
     <style media="screen">
       .botones{

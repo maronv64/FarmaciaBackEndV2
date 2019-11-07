@@ -6,7 +6,7 @@
     <div class="modal-content">
       
 	  	<div class="modal-header text-white" style="background:  #004a93">
-	        <h5 class="modal-title" id="exampleModalLabel">Modificar Rol</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">Modificar Usuario</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span class="text-white" aria-hidden="true">&times;</span>
 	        </button>  		
@@ -52,12 +52,13 @@
 			  </div>
 
 			  <div class="form-group row">
-			    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Password:</label>
+			    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Clave:</label>
 			    <div class="col-sm-8">
 			      <input type="password" class="form-control form-control-sm" id="txt_password_u_modal" placeholder="col-form-label-sm" required>
 			    </div>
 			    <div class="col-sm-1">
-			      <label  type="submit" class="form-control form-control-sm" id="btnVerPassword" placeholder="col-form-label-sm" > <span class="fa fa-eye"> </span></label> 
+					<button  type="button" class="form-control form-control-sm" id="btnVerPassword" placeholder="col-form-label-sm" > <i class="fa fa-eye" aria-hidden="true"></i></button> 
+			      {{-- <label  type="submit" class="form-control form-control-sm" id="btnVerPassword" placeholder="col-form-label-sm" > <i class="fa fa-eye" aria-hidden="true"></i></label>  --}}
 			    </div>
 			  </div>		  
 

@@ -7,7 +7,7 @@
     <div class="modal-content">
 
 	  	<div class="modal-header text-white" style="background:  #004a93">
-	        <h5 class="modal-title" id="exampleModalLabel">Modificar Rol</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">Datos del Producto</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span class="text-white" aria-hidden="true">&times;</span>
 	        </button>
@@ -16,27 +16,18 @@
 	  	<div class="modal-body">
 
 			<form id="frmProductos_modificar" class="needs-validation">
-				<input type="hidden" name="" id="nome_token_tipo_u_modal" required>
-
-				<div class="form-group row">
-				    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Descripcion:</label>
-				    <div class="col-sm-10">
-              <textarea class="form-control" name="name" rows="8" cols="80" id="txt_descripcion_producto_modal"></textarea>
-				    	<!-- <input type="text" class="form-control form-control-sm" id="txt_descripcion_t_u_modal" placeholder="col-form-label-sm" required> -->
-				    </div>
-				    <!-- <div class="col-sm-4">
-				      	<input type="submit" class="form-control form-control-sm bg-primary" id="btnGuardarProducto_modal" value="Enviar" style="color: white">
-				    </div> -->
+				{{-- <input type="hidden" name="" id="nome_token_productos_modal" required> --}}
+				<div class="container">
+					<div class="row" id="tabla_infor_producto">
+					</div>
 				</div>
-
 			</form>
 
 	  	</div>
 
 	  	<div class="modal-footer">
-
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 	  	</div>
-
     </div>
   </div>
 </div>

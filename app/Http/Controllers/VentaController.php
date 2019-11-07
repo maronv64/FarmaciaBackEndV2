@@ -128,10 +128,13 @@ class VentaController extends Controller
             if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
                 //no existe ese usuarios o fue dado de baja.
             } else {
-
-                $code = '200';
-                $items = Venta::where("nome_token",$request->nome_token)->first();
-                $message = 'OK';
+                try {
+                    $code = '200';
+                    $items = Venta::with('estado','cliente','courier','detalle')->where([["estado_del","1"],["nome_token",$request->nome_token]])->first();
+                    $message = 'OK';
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
 
             }
 

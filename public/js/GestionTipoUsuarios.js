@@ -45,7 +45,7 @@ function crear_tablaTipoUsuarios(data) {
 		      	<td><input type="hidden" value="${item.descripcion}">${item.descripcion}</td>
 		      	<td>
 			        <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${item.nome_token}')" data-toggle="modal" >Modificar</button>
-			        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${item.nome_token}')">Eliminar</button>
+			        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${item.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
 		      	</td>
 		    </tr>
    		`;
@@ -97,8 +97,8 @@ function crear_tablaTipoUsuarios_v2(data) {
               data: null,
               render: function (data, type, row) {
                 var html = `
-                <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}')" data-toggle="modal" >Modificar</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${data.nome_token}')">Eliminar</button>
+                <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 `;
 
                 return `${html}`;
