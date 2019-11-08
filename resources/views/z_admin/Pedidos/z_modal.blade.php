@@ -4,13 +4,13 @@
 <div class="modal fade frmPedidos_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
-      
+
 	  	<div class="modal-header text-white" style="background:  #004a93">
-	        <h5 class="modal-title" id="exampleModalLabel">Detalle</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">Datos del Pedido</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span class="text-white" aria-hidden="true">&times;</span>
-	        </button>  		
-	  	</div> 	
+	        </button>
+	  	</div>
 
 	  	<div class="modal-body">
 
@@ -26,14 +26,14 @@
 						</div>
 					</div>
 				</div>
-			</form>	
+			</form>
 
-		
 
-	  	</div>	     
+
+	  	</div>
 
 	  	<div class="modal-footer">
-	  		
+
 	  	</div>
 
     </div>

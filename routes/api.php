@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //ProductosJs
 Route::get('/v0/produtosjs', function () {
     // return echo "" . asset('/js/itemsBodega.js');
-    echo asset('/js/itemsBodega.js');// storage_path('app/public');
+    echo "hola";// storage_path('app/public');
 });
 
 //TIPOS DE USUARIOS-----------------------------------------------------------------------------------------------------------------------

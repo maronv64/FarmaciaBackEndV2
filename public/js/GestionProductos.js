@@ -45,12 +45,12 @@ function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
       success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
       {
         //console.log(data);
-        
+
         GP_crearTablaProductosBodega_v2(data);
       },
       error: function (error) {
         console.log(error);
-        
+
           mensaje = "OCURRIO UN ERROR : Archivo->GestionProductos.js , funcion->GP_cargarTablaProductosBodega_2()";
           swal(mensaje);
       }
@@ -60,11 +60,11 @@ function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
 
 var listaProductos = [];
 function GP_crearTablaProductosBodega_v2(data) {
-  $('#tablaProductosForanea').html('');
+  // $('#tablaProductosForanea').html('');
   $('#tablaProductosForanea_padre').html('');
 
   // $.get(`${apiProductos}api/v0/itemsBodega/`+last+`/`+filtro,function (data) {
-    
+
     $('#tablaProductosForanea_padre').DataTable({
 /////////////////////////////////////////////////////////////////////////////////////
       destroy: true,
@@ -80,7 +80,7 @@ function GP_crearTablaProductosBodega_v2(data) {
              'createdCell':  function (td, cellData, rowData, row, col) {
                   //$(td).attr('id','fila_p_'+rowData.id_item_bodega);
                   //console.log("rowData",rowData);
-                  
+
                   // $(td).html('');
                   // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
                   // $(td).append(`<button type="button" class="btn btn-sm btn-outline-info">ver</button>`);
@@ -113,11 +113,11 @@ function GP_crearTablaProductosBodega_v2(data) {
               data: null,
               render: function (data, type, row) {
                 var html = `
-                  
+
                   <label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
                   <button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>
                   <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
-                  
+
                 `;
                 checkeds(data.id_item_bodega);
 
@@ -312,27 +312,27 @@ function GP_verModalProductos(id_foraneo) {
       <div class="col"><strong>Descripcipción:</strong></div>            <div class="col">${data.item.descripcion}</div>
         <div class="w-100"></div>
       <div class="col"><strong>Descripcipción Larga:</strong></div>      <div class="col">${data.item.descripcion_larga}</div>
-        <div class="w-100"></div>   
+        <div class="w-100"></div>
       <div class="col"><strong>Precio:</strong></div>                    <div class="col">${data.item.precio}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
       <div class="col"><strong>Observación:</strong></div>               <div class="col">${data.item.observacion}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
       <div class="col"><strong>Marca:</strong></div>                     <div class="col">${data.item.marca.descripcion}</div>
-        <div class="w-100"></div>      
+        <div class="w-100"></div>
       <div class="col"><strong>Presentación:</strong></div>      <div class="col">${data.item.producto.presentacion}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
       <div class="col"><strong>Medida:</strong></div>      <div class="col">${data.item.producto.medida}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
       <div class="col"><strong>Concentración:</strong></div>      <div class="col">${data.item.producto.consentracion}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
       <div class="col"><strong>Stock Unidad:</strong></div>      <div class="col">${data.item.producto.stock_unidad}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
       <div class="col"><strong>Stock Fracción:</strong></div>      <div class="col">${data.item.producto.stock_fraccion}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
       <div class="col"><strong># de Fracciones:</strong></div>      <div class="col">${data.item.producto.num_fraccion}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
       <div class="col"><strong>Estado del Producto:</strong></div>      <div class="col">${data.estado_item_bodega.descripcion}</div>
-        <div class="w-100"></div>  
+        <div class="w-100"></div>
     `;
     $('#tabla_infor_producto').html(fila);
     //$('#txt_descripcion_producto_modal').val(console.log(data));

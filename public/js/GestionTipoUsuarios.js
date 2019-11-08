@@ -58,7 +58,7 @@ function crear_tablaTipoUsuarios(data) {
 function crear_tablaTipoUsuarios_v2(data) {
   $('#tablaTipoUsuarios_padre').html('');
   $('#tablaTipoUsuarios').html('');
-  
+
   $('#tablaTipoUsuarios_padre').DataTable({
 /////////////////////////////////////////////////////////////////////////////////////
       destroy: true,
@@ -72,6 +72,7 @@ function crear_tablaTipoUsuarios_v2(data) {
              'targets': 0,
              'data':'id',
              'createdCell':  function (td, cellData, rowData, row, col) {
+							 	console.log('1');
                   // $(td).attr('id','nombreCurso'+row);
                   // $(td).html('');
                   // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
@@ -96,8 +97,9 @@ function crear_tablaTipoUsuarios_v2(data) {
               title: 'ACCIONES',
               data: null,
               render: function (data, type, row) {
+
                 var html = `
-                <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}','${data.descripcion}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
                 <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 `;
 
@@ -110,13 +112,13 @@ function crear_tablaTipoUsuarios_v2(data) {
 /////////////////////////////////////////////////////////////////////////////////////
   });
 }
-function tipo_usuarios_ver(nome_token) {
-
+function tipo_usuarios_ver(nome_token,_descripcion) {
+	// console.log(_descripcion);
   //var descripcion = $(`.fila_${nome_token}`).find("td").eq(0).text();
   var descripcion = $(`.fila_${nome_token}`).find("td:eq(0) input[type='hidden']").val();
 
   $('#nome_token_tipo_u_modal').val(nome_token);
-  $('#txt_descripcion_t_u_modal').val(descripcion);
+  $('#txt_descripcion_t_u_modal').val(_descripcion);
   $('.frmTipoUsuarios_modal').modal('show');
   // debugger
 }
@@ -262,5 +264,3 @@ $('#frmTipoUsuarios').on('submit',function (e) {
   });
 
 });
-
-

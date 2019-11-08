@@ -32,13 +32,14 @@
 
 @endsection
 @section('scripts')
+    <script src="{{ asset('js/jsPDF/dist/jspdf.min.js') }}" defer></script>
 
     <script src="{{ asset('js/GestionTipoUsuarios.js') }}" defer></script>
     <script src="{{ asset('js/GestionUsuarios.js') }}" defer></script>
     <script src="{{ asset('js/GestionPedidos.js') }}" defer></script>
     <script src="{{ asset('js/GestionVentas.js') }}" defer></script>
-     <script src="{{ asset('js/GestionProductosJSON.js') }}" defer></script>
-    {{--<script src="{{ asset('js/GestionProductos.js') }}" defer></script>--}}
+    {{--<script src="{{ asset('js/GestionProductosJSON.js') }}" defer></script>--}}
+    <script src="{{ asset('js/GestionProductos.js') }}" defer></script>
     <script src="{{ asset('js/GestionReportes.js') }}" defer></script>
 
 @endsection

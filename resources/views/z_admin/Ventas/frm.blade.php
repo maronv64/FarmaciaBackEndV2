@@ -45,6 +45,7 @@
 
 	<div class="card-footer">
 		@include('z_admin.Ventas.tabla')
+    @include('z_admin.Ventas.z_modal')
 	</div>
 
 </div>

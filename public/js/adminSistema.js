@@ -12,6 +12,15 @@ $( document ).ready(function() {
     $('.form-control').attr('placeholder','');
 });
 
+// function popover(nome_token){
+//   $(`popover_${nome_token}`).popover({
+//     trigger: 'focus'
+//   });
+// }
+
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+});
 
 function ocultar(argument) {
 	$('#fondo').hide();

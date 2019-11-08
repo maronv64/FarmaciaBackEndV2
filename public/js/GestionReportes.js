@@ -40,3 +40,11 @@ function crear_estructura_repor_pedidos() {
   `;
   $('#ReporteContenido').append(html);
 }
+
+function generarPDF() {
+  console.log('hola');
+  var doc = new jsPDF()
+  var html = `<p>hola</p>`;
+  doc.text(html, 10, 10)
+  doc.save('a4.pdf')
+}

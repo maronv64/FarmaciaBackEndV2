@@ -26,7 +26,7 @@ function cargar_tablaPedidos(value='') {
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
       //console.log(data);
-      GP_crearTablaPedidos_2(data.items);   
+      GP_crearTablaPedidos_2(data.items);
     },
     error: function () {
         mensaje = "OCURRIO UN ERROR : Archivo->GestionPedidos.js, funcion->cargar_tablaPedidos()";
@@ -62,6 +62,10 @@ function crear_tablaPedidos(data) {
 
 }
 
+function pedidos_eliminar(nome_token) {
+  
+}
+
 function GP_crearTablaPedidos_2(data) {
   // debugger
   $('#tablaPedidos').html('');
@@ -81,7 +85,7 @@ function GP_crearTablaPedidos_2(data) {
              'data':'id',
              'createdCell':  function (td, cellData, rowData, row, col) {
                //console.log(rowData);
-               
+
                   // $(td).attr('id','nombreCurso'+row);
                   // $(td).html('');
                   // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
@@ -109,7 +113,7 @@ function GP_crearTablaPedidos_2(data) {
                 `;
 
                 return `${html}`;
-                
+
               }
           },
           {
@@ -134,7 +138,7 @@ function GP_crearTablaPedidos_2(data) {
 }
 
 function pedidos_ver(nome_token) {
-  
+
   var FrmData=
   {
     nome_token: nome_token,
@@ -151,9 +155,9 @@ function pedidos_ver(nome_token) {
     data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
-      console.log(data);  
+      console.log(data);
       crear_pedido_modal(data.items);
-      $(".frmPedidos_modal").modal('show'); 
+      $(".frmPedidos_modal").modal('show');
     },
     error: function () {
         mensaje = "OCURRIO UN ERROR : Archivo->GestionPedidos.js, funcion->cargar_tablaPedidos()";
@@ -161,14 +165,14 @@ function pedidos_ver(nome_token) {
     }
   });
 
-	
+
 }
 
 function crear_pedido_modal(data) {
   $("#tabla_infor_pedido").html('');
   // $("#tabla_infor_pedido_productos").html('');
   var detalle = ``;
- 
+
   $("#pedido_listado_productos").DataTable({
     /////////////////////////////////////////////////////////////////////////////////////
           destroy: true,
@@ -234,13 +238,13 @@ function crear_pedido_modal(data) {
   var fila = `
       <div class="col bg-info"><strong>Fecha:</strong></div>           <div class="col">${data.fecha}</div>
       <div class="col  bg-info"><strong>ToTal:</strong></div>           <div class="col">${data.total}</div>
-        <div class="w-100"></div> 
+        <div class="w-100"></div>
       <div class="col-3 bg-info"><strong>Cliente :</strong></div>           <div class="col">${data.cliente.name}</div>
         <div class="w-100"></div>
         <hr>
-      <div class="col"><strong>Listado de Productos :</strong></div>    
-        <div class="w-100"></div>   
-          
+      <div class="col"><strong>Listado de Productos :</strong></div>
+        <div class="w-100"></div>
+
     `;
     $('#tabla_infor_pedido').html(fila);
 }
@@ -362,14 +366,14 @@ function crear_tablaCouriers_v2(data) {
                 title: 'ACCIONES',
                 data: null,
                 render: function (data, type, row) {
-  
+
                   var html = `
                     <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" onclick="pedidos_asignarCourier('${data.nome_token}')">Asignar</button>
                   `;
-  
+
                   return `${html}`;
                   // return `<button>hola</button>`;
-  
+
                 }
             }
         ],
@@ -413,8 +417,8 @@ function pedidos_asignarCourier(nome_token) {
 		    {
 					//swal(data);
           //console.log(data);
-         
-          
+
+
 		    	cargar_tablaPedidos('');
 					$(".frmCourier_modal").modal("hide");
 		    },
