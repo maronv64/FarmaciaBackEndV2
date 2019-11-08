@@ -14,6 +14,7 @@
                 @include('z_admin.Productos.frm')
                 @include('z_admin.Pedidos.frm')
                 @include('z_admin.Ventas.frm')
+                @include('z_admin.Reportes.frm')
             </div>
 
             <div id="fondo" style="height: 100%" class="card">
@@ -31,12 +32,13 @@
 
 @endsection
 @section('scripts')
-    
+
     <script src="{{ asset('js/GestionTipoUsuarios.js') }}" defer></script>
     <script src="{{ asset('js/GestionUsuarios.js') }}" defer></script>
     <script src="{{ asset('js/GestionPedidos.js') }}" defer></script>
     <script src="{{ asset('js/GestionVentas.js') }}" defer></script>
-    {{-- <script src="{{ asset('js/GestionProductosJSON.js') }}" defer></script> --}}
-    <script src="{{ asset('js/GestionProductos.js') }}" defer></script>
+     <script src="{{ asset('js/GestionProductosJSON.js') }}" defer></script>
+    {{--<script src="{{ asset('js/GestionProductos.js') }}" defer></script>--}}
+    <script src="{{ asset('js/GestionReportes.js') }}" defer></script>
 
 @endsection

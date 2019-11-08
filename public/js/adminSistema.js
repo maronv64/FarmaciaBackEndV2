@@ -9,24 +9,28 @@ $( document ).ready(function() {
     // $('#btnVerFrmVentas').hide();
     ocultar();
     $('#fondo').show();
+    $('.form-control').attr('placeholder','');
 });
+
 
 function ocultar(argument) {
 	$('#fondo').hide();
-    $('#cardTipoUsuarios').hide();
-    $('#cardUsuarios').hide();
-    $('#cardProductos').hide();
-    $('#cardPedidos').hide();
-    $('#cardVentas').hide();
+  $('#cardTipoUsuarios').hide();
+  $('#cardUsuarios').hide();
+  $('#cardProductos').hide();
+  $('#cardPedidos').hide();
+  $('#cardVentas').hide();
+  $('#cardReportes').hide();
 }
 
 function mostrar(argument) {
 	$('#fondo').hide();
-    $('#cardTipoUsuarios').show();
-    $('#cardUsuarios').show();
-    $('#cardProductos').show();
-    $('#cardPedidos').show();
-    $('#cardVentas').show();
+  $('#cardTipoUsuarios').show();
+  $('#cardUsuarios').show();
+  $('#cardProductos').show();
+  $('#cardPedidos').show();
+  $('#cardVentas').show();
+  $('#cardReportes').show();
 }
 
 function limpiar() {
@@ -96,4 +100,10 @@ $('#btnVerFrmProductos').click(function (e) {
 	$('#cardProductos').show();
 	//cargar_frm_ventas();
 });
+
+$('#btnVerFrmReportes').click(function (e) {
+  ocultar();
+  $('#cardReportes').show();
+});
+
 //*****************************************************************************************************************************************************************************

@@ -3,7 +3,7 @@
         <!-- <div class="card-header">Opciones</div> -->
         <div class="card-body">
             <!-- <button class="btn btn-secondary btn-lg --> <!--btn-block">Usuarios</button> -->
-            @guest
+      @guest
 
 			@else
 				@if(Auth::user()->idtipo==1)
@@ -29,7 +29,15 @@
 	  			<div class="fa fa-shopping-cart"></div>
 	  			<div class="row"><div class="col-md-12"><h6>Ventas<h6></div>
 	  		</button>
-
+      @guest
+      @else
+        @if(Auth::user()->idtipo==1)
+          <button id="btnVerFrmReportes" class="btn btn-secondary btn-lg btn-block botones">
+            <div class="fa fa-phone"></div>
+            <div class="row"><div class="col-md-12"><h6>Reportes<h6></div>
+          </button>
+        @endif
+      @endguest
         </div>
     </div>
 </div>

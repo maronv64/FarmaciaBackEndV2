@@ -1,12 +1,11 @@
-// var apiProductos = "http://192.168.137.1:8080/FarmaciaApis/public/"
+// // var apiProductos = "http://192.168.137.1:8080/FarmaciaApis/public/"
 // var apiProductos = "http://localhost:8080/FarmaciaApis/public/"
-var apiProductos = "http://localhost:8000/"
 var urlApi = "";
 
 function GP_cargarTablaProductosBodega() {
   // debugger
   $('#tablaProductosForanea').html('');
-  $.get(`${apiProductos}itemsBodega.json`,function (data) {
+  $.get(`${apiProductos}api/v0/itemsBodega`,function (data) {
      // debugger
     // console.log(data);
     $.each(data,function (a,item) {
@@ -28,10 +27,44 @@ function GP_cargarTablaProductosBodega() {
   });
 }
 
-function GP_cargarTablaProductosBodega_2() {
+function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
+  var FrmData=
+	{
+		value: filtro,
+	}
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+// debugger
+  $.ajax({
+      url: 'http://localhost:8080/FarmaciaApis/public/api/v0/itemsBodegaFiltro/'+last+'/'+FrmData,// Url que se envia para la solicitud esta en el web php es la ruta
+      method: "GET",             // Tipo de solicitud que se enviará, llamado como método
+      data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+      success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+      {
+        //console.log(data);
+
+        GP_crearTablaProductosBodega_v2(data);
+      },
+      error: function (error) {
+        console.log(error);
+
+          mensaje = "OCURRIO UN ERROR : Archivo->GestionProductos.js , funcion->GP_cargarTablaProductosBodega_2()";
+          swal(mensaje);
+      }
+  });
+
+}
+
+var listaProductos = [];
+function GP_crearTablaProductosBodega_v2(data) {
   $('#tablaProductosForanea').html('');
   $('#tablaProductosForanea_padre').html('');
-  $.get(`${apiProductos}itemsBodega.json`,function (data) {
+
+  // $.get(`${apiProductos}api/v0/itemsBodega/`+last+`/`+filtro,function (data) {
+
     $('#tablaProductosForanea_padre').DataTable({
 /////////////////////////////////////////////////////////////////////////////////////
       destroy: true,
@@ -42,10 +75,12 @@ function GP_cargarTablaProductosBodega_2() {
       },
       'columnDefs': [
           {
-             'targets': 3,
+             'targets': 4,
              'data':'item.id_item',
              'createdCell':  function (td, cellData, rowData, row, col) {
-                  // $(td).attr('id','nombreCurso'+row);
+                  //$(td).attr('id','fila_p_'+rowData.id_item_bodega);
+                  //console.log("rowData",rowData);
+
                   // $(td).html('');
                   // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
                   // $(td).append(`<button type="button" class="btn btn-sm btn-outline-info">ver</button>`);
@@ -70,19 +105,19 @@ function GP_cargarTablaProductosBodega_2() {
               }
           },
           {
-              title: 'STOCK',
-              data: null,
-              render: function ( data, type, row ) {
-                return data.item.producto.stock_unidad;
-              }
+            title: 'STOCK',
+            data: 'stock_unidad',
           },
           {
               title: 'ACCIONES',
               data: null,
               render: function (data, type, row) {
                 var html = `
-                  <label class="switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
-                  <button type="button" class="btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})">ver</button>
+
+                  <label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
+                  <button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+
                 `;
                 checkeds(data.id_item_bodega);
 
@@ -94,7 +129,7 @@ function GP_cargarTablaProductosBodega_2() {
       ],
 /////////////////////////////////////////////////////////////////////////////////////
     });
-  });
+  // });
 }
 
 function GP_escoger_producto(id_foraneo) {
@@ -114,18 +149,9 @@ function GP_agregar_producto(id_foraneo) {
 
   var FrmData={};
 
-  $.get(`${apiProductos}itemsBodega.json`,function (data) {
-    $.each(data,function functionName(a,item) {
-      if (item.id_item_bodega===id_foraneo) {
-        FrmData = item;
-      }
-    });
-    // FrmData = data;
+  $.get(`${apiProductos}api/v0/itemsBodega/${id_foraneo}`,function (data) {
+    FrmData = data;
   });
-  //
-  // $.get(`${apiProductos}api/v0/itemsBodega/${id_foraneo}`,function (data) {
-  //   FrmData = data;
-  // });
 
   $.ajaxSetup({
     headers: {
@@ -151,6 +177,8 @@ function GP_agregar_producto(id_foraneo) {
         {
           // debugger
           swal("ACCION EXITOSA!", "Datos Guardados", "success");
+          $(`#boton_p_${id_foraneo}`).attr('hidden',false);
+          // $(`#fila_p_${id_foraneo}`).append(`<button type="button" class="col-xs btn btn-sm btn-outline-info"><i class="fa fa-picture-o" aria-hidden="true"></i></button>`);
           // limpiar();
           // console.log(data);
         },
@@ -262,15 +290,52 @@ function checkeds(id_foraneo) {
       // var checkbox = document.getElementById(`checkbox_${id_foraneo}`);
       // checkbox.checked = true;
       $(`#checkbox_${id_foraneo}`).prop('checked',true);
+      $(`#boton_p_${id_foraneo}`).attr('hidden',false);
+      // $(`#fila_p_${id_foraneo}`).append(`<button type="button" class="col-xs btn btn-sm btn-outline-info"><i class="fa fa-picture-o" aria-hidden="true"></i></button>`);
       // $(`#checkbox_${id_foraneo}`).prop('checked');
     }
   });
 }
 ////////////////////////////////////////////////////////////////////////////////////
 function GP_verModalProductos(id_foraneo) {
-
-  $.get(`${apiProductos}itemsBodega.json`,function (data) {
-    // $('#txt_descripcion_producto_modal').val(console.log(data));
+  $('#tabla_infor_producto').html('');
+  $.get(`${apiProductos}api/v0/itemsBodega/${id_foraneo}`,function (data) {
+    var fila = `
+      <div class="col"><strong>Código de Barra:</strong></div>           <div class="col">${data.item.cod_barra}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Código de Barra Alterno :</strong></div>  <div class="col">${data.item.cod_barra_alterno}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Código de Barra Alterno 1:</strong></div> <div class="col">${data.item.codigo_alterno_1}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Código de Barra Alterno 2:</strong></div> <div class="col">${data.item.codigo_alterno_2}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Descripcipción:</strong></div>            <div class="col">${data.item.descripcion}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Descripcipción Larga:</strong></div>      <div class="col">${data.item.descripcion_larga}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Precio:</strong></div>                    <div class="col">${data.item.precio}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Observación:</strong></div>               <div class="col">${data.item.observacion}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Marca:</strong></div>                     <div class="col">${data.item.marca.descripcion}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Presentación:</strong></div>      <div class="col">${data.item.producto.presentacion}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Medida:</strong></div>      <div class="col">${data.item.producto.medida}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Concentración:</strong></div>      <div class="col">${data.item.producto.consentracion}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Stock Unidad:</strong></div>      <div class="col">${data.item.producto.stock_unidad}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Stock Fracción:</strong></div>      <div class="col">${data.item.producto.stock_fraccion}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong># de Fracciones:</strong></div>      <div class="col">${data.item.producto.num_fraccion}</div>
+        <div class="w-100"></div>
+      <div class="col"><strong>Estado del Producto:</strong></div>      <div class="col">${data.estado_item_bodega.descripcion}</div>
+        <div class="w-100"></div>
+    `;
+    $('#tabla_infor_producto').html(fila);
+    //$('#txt_descripcion_producto_modal').val(console.log(data));
   });
   $(`.frmProductos_modal`).modal('show');
 
