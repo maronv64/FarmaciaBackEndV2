@@ -96,6 +96,7 @@ function crear_tablaUsuarios(data) {
 }
 
 function crear_tablaUsuarios_2(data) {
+  var ancho = '16%';
   $('#tablaUsuarios_padre').html('');
   $('#tablaUsuarios').html('');
   
@@ -123,26 +124,32 @@ function crear_tablaUsuarios_2(data) {
       columns: [
           {
               title: ' TIPO',
+              width:ancho,
               data: 'tipo.descripcion'
           },
           {
               title: 'NOMBRE',
+              width:ancho,
               data: 'name'
           },
           {
             title: 'E-MAIL',
+            width:ancho,
             data: 'email'
           },
           {
             title: 'CÉDULA',
+            width:ancho,
             data: 'cedula'
           },
           {
             title: 'CELULAR',
+            width:ancho,
             data: 'celular'
           },
           {
               title: 'ACCIONES',
+              width:ancho,
               data: null,
               render: function (data, type, row) {
                 var html = `

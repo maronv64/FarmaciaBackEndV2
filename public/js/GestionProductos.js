@@ -60,7 +60,8 @@ function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
 
 var listaProductos = [];
 function GP_crearTablaProductosBodega_v2(data) {
-  // $('#tablaProductosForanea').html('');
+  var ancho = '20%';
+  $('#tablaProductosForanea').html('');
   $('#tablaProductosForanea_padre').html('');
 
   // $.get(`${apiProductos}api/v0/itemsBodega/`+last+`/`+filtro,function (data) {
@@ -91,25 +92,31 @@ function GP_crearTablaProductosBodega_v2(data) {
       columns: [
           {
               title: 'COD. BARRAS',
+              width: ancho,
               data: 'item.cod_barra'
+              
           },
           {
               title: 'NOMBRE',
+              width: '20%',
               data: 'item.descripcion'
           },
           {
               title: 'PRECIO',
               data: null,
+              width: ancho,
               render: function ( data, type, row ) {
                 return "$ "+data.item.precio;
               }
           },
           {
             title: 'STOCK',
+            width: ancho,
             data: 'stock_unidad',
           },
           {
               title: 'ACCIONES',
+              width: ancho,
               data: null,
               render: function (data, type, row) {
                 var html = `
@@ -122,7 +129,7 @@ function GP_crearTablaProductosBodega_v2(data) {
                 checkeds(data.id_item_bodega);
 
                 return `${html}`;
-                // return `<button>hola</button>`;
+                 //return `<button>hola</button>`;
 
               }
           }

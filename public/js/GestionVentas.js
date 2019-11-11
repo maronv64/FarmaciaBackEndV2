@@ -27,7 +27,7 @@ function cargar_tablaVentas(value='') {
         crear_tablaVentas_v2(data.items);
     },
     error: function () {
-        mensaje = "OCURRIO UN ERROR: Archivo->GestionUsuarios.js , funcion->cargar_tablaVentas()";
+        mensaje = "OCURRIO UN ERROR: Archivo->GestionVentas.js , funcion->cargar_tablaVentas()";
         swal(mensaje);
     }
   });
@@ -64,6 +64,7 @@ function crear_tablaVentas(data) {
 
 function crear_tablaVentas_v2(data) {
     // debugger
+    var ancho = "16%";
     $('#tablaVentas').html('');
     $('#tablaVentas_padre').html('');
     //$.get(`${apiProductos}api/v0/itemsBodega`,function (data) {
@@ -93,19 +94,23 @@ function crear_tablaVentas_v2(data) {
         columns: [
             {
               title: 'FECHA',
+              width:ancho,
               data: 'fecha'
             },
             {
               title: 'CLIENTE',
+              width:ancho,
               data: 'cliente.name'
             },
             {
               title: 'TRANSPORTE',
+              width:ancho,
               data: 'courier.name',
 
             },
             {
               title: 'TOTAL',
+              width:ancho,
               data: null,
               render:function (data, type, row) {
                 var html = `$ ${data.total}`;
@@ -115,6 +120,7 @@ function crear_tablaVentas_v2(data) {
             },
             {
               title: 'ESTADO',
+              width:ancho,
               data: null,
               render: function (data, type, row) {
                 var descripcion = ``;
@@ -143,11 +149,12 @@ function crear_tablaVentas_v2(data) {
             },
             {
                 title: 'ACCIONES',
+                width:ancho,
                 data: null,
                 render: function (data, type, row) {
 
                   var html = `
-                    <button type="button" class="btn btn-sm btn-outline-info" onclick="ventas_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-info" onclick="ventas_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-eye" aria-hidden="true"></i></button>
                     <button type="button" class="btn btn-sm btn-outline-secondary" onclick="ventas_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                   `;
 
@@ -168,6 +175,48 @@ $("#filtroVentas").keyup(function (e) {
 });
 
 function ventas_eliminar(nome_token) {
+
+  var FrmData=
+  {
+    nome_token:  nome_token,
+  }
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  swal({
+    title: "Estas seguro de esto?",
+    text: "Si aceptas, los datos seran eliminados!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+
+      $.ajax({
+        url: '/api/v0/ventas_delete/'+$('#nome_token_user').val()+'/'+FrmData,// Url que se envia para la solicitud esta en el web php es la ruta
+        method: "DELETE",             // Tipo de solicitud que se enviará, llamado como método
+        data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+        success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+        {
+          swal("ACCION EXITOSA!", "Datos Eliminados", "success");
+          cargar_tablaVentas('');
+        },
+        error: function () {
+            mensaje = "OCURRIO UN ERROR: Archivo->GestionVentas.js , funcion->ventas_eliminar()";
+            swal(mensaje);
+
+        }
+      });
+
+    } else {
+      swal("Cancelado!");
+    }
+  });
 
 }
 
@@ -281,3 +330,4 @@ function crear_venta_modal(data) {
     `;
     $('#tabla_infor_venta').html(fila);
 }
+

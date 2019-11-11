@@ -63,11 +63,52 @@ function crear_tablaPedidos(data) {
 }
 
 function pedidos_eliminar(nome_token) {
-  
+  var FrmData=
+  {
+    nome_token:  nome_token,
+  }
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  swal({
+    title: "Estas seguro de esto?",
+    text: "Si aceptas, los datos seran eliminados!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+
+      $.ajax({
+        url: '/api/v0/ventas_delete/'+$('#nome_token_user').val()+'/'+FrmData,// Url que se envia para la solicitud esta en el web php es la ruta
+        method: "DELETE",             // Tipo de solicitud que se enviará, llamado como método
+        data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+        success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+        {
+          swal("ACCION EXITOSA!", "Datos Eliminados", "success");
+          cargar_tablaPedidos('');
+        },
+        error: function () {
+            mensaje = "OCURRIO UN ERROR: Archivo->GestionVentas.js , funcion->ventas_eliminar()";
+            swal(mensaje);
+
+        }
+      });
+
+    } else {
+      swal("Cancelado!");
+    }
+  });
 }
 
 function GP_crearTablaPedidos_2(data) {
   // debugger
+  var ancho ="25%";
   $('#tablaPedidos').html('');
   $('#tablaPedidos_padre').html('');
   //$.get(`${apiProductos}api/v0/itemsBodega`,function (data) {
@@ -97,14 +138,17 @@ function GP_crearTablaPedidos_2(data) {
       columns: [
           {
               title: 'FECHA',
+              width:ancho,
               data: 'fecha'
           },
           {
               title: 'CLIENTE',
+              width:ancho,
               data: 'cliente.name'
           },
           {
               title: 'TRANSPORTE',
+              width:ancho,
               data: null,
               render: function ( data, type, row ) {
 
@@ -118,6 +162,7 @@ function GP_crearTablaPedidos_2(data) {
           },
           {
               title: 'ACCIONES',
+              width:ancho,
               data: null,
               render: function (data, type, row) {
 

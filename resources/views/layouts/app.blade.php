@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Farmacias Cruz Azuld</title>
+    <title>Farmacias Cruz Azul</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

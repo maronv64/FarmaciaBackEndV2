@@ -56,6 +56,7 @@ function crear_tablaTipoUsuarios(data) {
 
 }
 function crear_tablaTipoUsuarios_v2(data) {
+  var ancho = '50%';
   $('#tablaTipoUsuarios_padre').html('');
   $('#tablaTipoUsuarios').html('');
 
@@ -91,10 +92,12 @@ function crear_tablaTipoUsuarios_v2(data) {
           // },
           {
               title: ' TIPO',
+              width: ancho,
               data: 'descripcion'
           },
           {
               title: 'ACCIONES',
+              width: ancho,
               data: null,
               render: function (data, type, row) {
 
