@@ -107,6 +107,7 @@ $('#btnVerFrmProductos').click(function (e) {
   GP_cargar_lista_productos('');
   GP_cargarTablaProductosBodega_2(0,'');
 	$('#cardProductos').show();
+	// GP_recorrer_tabla();
 	//cargar_frm_ventas();
 });
 
@@ -116,3 +117,11 @@ $('#btnVerFrmReportes').click(function (e) {
 });
 
 //*****************************************************************************************************************************************************************************
+
+$('.ver_password').mousedown(function (e) {
+	$('.password').attr('type','text');
+});
+
+$('.ver_password').mouseup(function (e) {
+	$('.password').attr('type','password');
+});

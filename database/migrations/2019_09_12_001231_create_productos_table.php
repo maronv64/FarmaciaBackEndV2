@@ -43,6 +43,11 @@ class CreateProductosTable extends Migration
             $table->string('cantidad')->nullable();
             $table->string('estado_del','1')->default('1');
             $table->string('nome_token');
+            //
+            $table->string('file_name')->nullable();
+            $table->string('file_extension')->nullable();
+            $table->string('file_ruta')->nullable();
+            //
             $table->timestamps();
         });
     }

@@ -88,7 +88,7 @@ class UserController extends Controller
 
         return response()->json($items);
     }
-
+   
     /**
      * Display the specified resource.
      *
@@ -399,6 +399,47 @@ class UserController extends Controller
                   );
       return response()->json($result);
 
+    }
+    public function register(Request $request)
+    {
+
+        $ignorar = array("/", ".", "$");
+
+        $code='';
+        $message ='';
+        $items ='';
+
+        try {
+            
+            $code = '200';
+
+            $items = new User();
+
+            $items->idtipo = (TipoUsuario::where('cod','004')->first())->id;
+            $items->name = $request->name;
+            $items->email = $request->email;
+            $items->cedula = $request->cedula;
+            $items->celular = $request->celular;
+            $items->password = bcrypt($request->password);
+            $items->password2 = $request->password2;
+            $items->estado_del = '1';
+            $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
+            $items->save();
+    
+            $message = 'OK';
+
+        } catch (\Throwable $th) {
+            $code = '418';
+            $message = 'I am a teapot';
+        }
+
+        $result =   array(
+                        'items'     => $items,
+                        'code'      => $code,
+                        'message'   => $message
+                    );
+
+        return response()->json($items);
     }
 
 }

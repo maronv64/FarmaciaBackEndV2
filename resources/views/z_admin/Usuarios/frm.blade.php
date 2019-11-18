@@ -42,15 +42,18 @@
 
 		  <div class="form-group row">
 		    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Password:</label>
-		    <div class="col-sm-10">
-		      <input type="password" class="form-control form-control-sm limpiar" id="txt_password_u" placeholder="col-form-label-sm" required>
-		    </div>
+		    <div class="col-sm-9">
+		      <input type="password" class="form-control form-control-sm limpiar password" id="txt_password_u" placeholder="col-form-label-sm" required>
+			</div>
+			<div class="col-sm-1">
+				<button  type="button" class="form-control form-control-sm ver_password"  placeholder="col-form-label-sm" > <i class="fa fa-eye" aria-hidden="true"></i></button> 
+			</div>
 		  </div>
 
 		  <div class="form-group row">
 		    <div class="col-sm-12">
 		      <input type="submit" class="form-control form-control-sm bg-primary" id="btnGuardarUsuario" style="color: white" value="Enviar">
-		    </div>
+			</div>
 		  </div>
 
 		</form>

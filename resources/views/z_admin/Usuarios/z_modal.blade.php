@@ -54,10 +54,10 @@
 			  <div class="form-group row">
 			    <label for="colFormLabelSm" class="col-sm-3 col-form-label col-form-label-sm">Clave:</label>
 			    <div class="col-sm-8">
-			      <input type="password" class="form-control form-control-sm" id="txt_password_u_modal" placeholder="col-form-label-sm" required>
+			      <input type="password" class="form-control form-control-sm password" id="txt_password_u_modal" placeholder="col-form-label-sm" required>
 			    </div>
 			    <div class="col-sm-1">
-					<button  type="button" class="form-control form-control-sm" id="btnVerPassword" placeholder="col-form-label-sm" > <i class="fa fa-eye" aria-hidden="true"></i></button> 
+					<button  type="button" class="form-control form-control-sm ver_password"  placeholder="col-form-label-sm" > <i class="fa fa-eye" aria-hidden="true"></i></button> 
 			      {{-- <label  type="submit" class="form-control form-control-sm" id="btnVerPassword" placeholder="col-form-label-sm" > <i class="fa fa-eye" aria-hidden="true"></i></label>  --}}
 			    </div>
 			  </div>		  
