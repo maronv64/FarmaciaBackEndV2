@@ -59,6 +59,85 @@ function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
 }
 
 var listaProductos = [];
+// function GP_crearTablaProductosBodega_v2(data) {
+//   var ancho = '20%';
+//   $('#tablaProductosForanea').html('');
+//   $('#tablaProductosForanea_padre').html('');
+
+//   // $.get(`${apiProductos}api/v0/itemsBodega/`+last+`/`+filtro,function (data) {
+
+//     $('#tablaProductosForanea_padre').DataTable({
+// /////////////////////////////////////////////////////////////////////////////////////
+//       destroy: true,
+//       order: [],
+//       data: data,
+//       'createdRow': function (row, data, dataIndex) {
+//           // console.log(data);
+//       },
+//       'columnDefs': [
+//           {
+//              'targets': 4,
+//              'data':'item.id_item',
+//              'createdCell':  function (td, cellData, rowData, row, col) {
+//                   //$(td).attr('id','fila_p_'+rowData.id_item_bodega);
+//                   //console.log("rowData",rowData);
+
+//                   // $(td).html('');
+//                   // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
+//                   // $(td).append(`<button type="button" class="btn btn-sm btn-outline-info">ver</button>`);
+//                   // $(td).append('<button type="button" class="btn btn-sm btn-outline-secondary">Eliminar</button>');
+//              },
+//           }
+//        ],
+//       columns: [
+//           {
+//               title: 'COD. BARRAS',
+//               width: ancho,
+//               data: 'item.cod_barra'
+              
+//           },
+//           {
+//               title: 'NOMBRE',
+//               width: '20%',
+//               data: 'item.descripcion'
+//           },
+//           {
+//               title: 'PRECIO',
+//               data: null,
+//               width: ancho,
+//               render: function ( data, type, row ) {
+//                 return "$ "+data.item.precio;
+//               }
+//           },
+//           {
+//             title: 'STOCK',
+//             width: ancho,
+//             data: 'stock_unidad',
+//           },
+//           {
+//               title: 'ACCIONES',
+//               width: ancho,
+//               data: null,
+//               render: function (data, type, row) {
+//                 var html = `
+
+//                   <label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
+//                   <button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>
+//                   <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+
+//                 `;
+//                 checkeds(data.id_item_bodega);
+
+//                 return `${html}`;
+//                  //return `<button>hola</button>`;
+
+//               }
+//           }
+//       ],
+// /////////////////////////////////////////////////////////////////////////////////////
+//     });
+//   // });
+// }
 function GP_crearTablaProductosBodega_v2(data) {
   var ancho = '20%';
   $('#tablaProductosForanea').html('');
@@ -79,13 +158,37 @@ function GP_crearTablaProductosBodega_v2(data) {
              'targets': 4,
              'data':'item.id_item',
              'createdCell':  function (td, cellData, rowData, row, col) {
-                  //$(td).attr('id','fila_p_'+rowData.id_item_bodega);
-                  //console.log("rowData",rowData);
+                //$(td).attr('id','fila_p_'+rowData.id_item_bodega);
+                //console.log("rowData",rowData);
+                // var data = cellData;
+                // //checkeds(cellData.id_item_bodega);
+                // var data = cellData;
+                // var id_foraneo = cellData.id_item_bodega;
 
-                  // $(td).html('');
-                  // $(td).append('<label class="switch"><input type="checkbox"><span class="slider round"></span></label>');
-                  // $(td).append(`<button type="button" class="btn btn-sm btn-outline-info">ver</button>`);
-                  // $(td).append('<button type="button" class="btn btn-sm btn-outline-secondary">Eliminar</button>');
+                // $(td).html('');
+                // var existe = false;
+
+                // $.each(lista_productos,function (a,item) {
+                //   // console.log(item);
+                //   if (item==id_foraneo) {
+                //     existe = true;
+                //     //$(td).append(`<p>${id_foraneo}</p>`);
+                //     $(td).append(`<label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" checked="true" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>`);
+                //     $(td).append(`<button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>`);
+                //     $(td).append(`<button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>`);
+                  
+                //     // debugger
+                //   }
+                  
+                // });
+
+                // if (existe==false) {
+                //   $(td).append(`<label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>`);
+                //   $(td).append(`<button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>`);
+                //   $(td).append(`<button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>`);
+                  
+                // }
+                                    
              },
           }
        ],
@@ -119,18 +222,48 @@ function GP_crearTablaProductosBodega_v2(data) {
               width: ancho,
               data: null,
               render: function (data, type, row) {
-                var html = `
 
-                  <label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
-                  <button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                  <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+                var html ="";
+                var existe = false;                
+                // var html = `
 
-                `;
-                checkeds(data.id_item_bodega);
+                //   <label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
+                //   <button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                //   <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
 
+                // `;
+                
+                //checkeds(data.id_item_bodega);
+
+                $.each(lista_productos,function (a,item) {
+                  // console.log(item);
+                  if (item==data.id_item_bodega) {
+                    existe = true;
+                    //debugger
+                    html = `
+                      <label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" checked="true" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
+                      <button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                      <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+                    `;
+                    
+                  }
+                  
+                });
+
+                if (existe==false) {
+
+                  html = `
+                    <label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
+                    <button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                    <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+                  `;
+
+                  
+
+                }
                 return `${html}`;
                  //return `<button>hola</button>`;
-
+                 
               }
           }
       ],
@@ -347,3 +480,107 @@ function GP_verModalProductos(id_foraneo) {
   $(`.frmProductos_modal`).modal('show');
 
 }
+
+function GP_agregar_imagen_producto(id_foraneo){
+  $('#id_foraneo').val(id_foraneo);
+  GP_preview_producto_img(id_foraneo);
+  $('.frmProductos_img_modal').modal('show');
+}
+
+//enctype="multipart/form-data"
+$('#file_producto_img').change(function (e) {
+  //console.log($(this).val());
+  //$('#iframe_producto_img').attr('src',$(this).val());
+});
+
+function GP_preview_producto_img(id_foraneo) {
+
+  var FrmData = {
+    nome_token:id_foraneo
+  }
+
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $.ajax({
+    url: '/api/v0/productos_show/'+$('#nome_token_user').val()+'/'+FrmData,// Url que se envia para la solicitud esta en el web php es la ruta
+    method: "GET",             // Tipo de solicitud que se enviará, llamado como método
+    data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+    success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+    {
+      console.log(data);
+      
+      if (data.items.file_name == null) {
+        $('#iframe_producto_img').attr('src',`/img/fondo3.jpg`); 
+      }else{
+        // $(`#file_producto_img_label`).val();
+        $('#iframe_producto_img').attr('src',`/img/items/${data.items.file_name}.${data.items.file_extension}`); 
+      }
+    },
+    error: function () {
+      $('#iframe_producto_img').attr('src',`/img/fondo3.jpg`); 
+
+        // mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->GP_preview_producto_img()";
+        // swal(mensaje);
+    }
+  });
+
+  
+}
+
+$('#frmProductos_img_modificar').on('submit',function (e) {
+  
+  e.preventDefault();
+  var FrmData = new FormData(this);
+  // alert();
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  swal({
+    title: "Estas seguro de esto?",
+    text: "Si aceptas, se agregara una imagen al producto!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      // debugger
+      $.ajax({
+        url: '/api/v0/productos_guardar_img/'+$('#nome_token_user').val()+'/'+FrmData,// Url que se envia para la solicitud esta en el web php es la ruta
+        method: "POST",             // Tipo de solicitud que se enviará, llamado como método
+        data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
+        {
+          // debugger
+          swal("ACCION EXITOSA!", "Datos Guardados", "success");
+          // $('#iframe_producto_img').attr('width','100%');
+          // $('#iframe_producto_img').attr('height','100%');
+          $('#iframe_producto_img').attr('src',`/img/items/${data.items.file_name}.${data.items.file_extension}`);
+          // $('#iframe_producto_img').append(`<img height="100%" width="100%" src="/img/items/${data.items.file_name}.${data.items.file_extension}" alt="">`);
+          
+        
+        },
+        error: function () {
+            mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->frmProductos_img_modificar";
+            swal(mensaje);
+            
+        }
+      });
+
+    } else {
+      swal("Cancelado!");
+    }
+  });
+
+});
+

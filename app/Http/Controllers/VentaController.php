@@ -474,7 +474,7 @@ class VentaController extends Controller
     }
     public function mi_historial_entregas($nome_token_user='',Request $request)
     {
-
+        
         $code='';
         $message ='';
         $items ='';

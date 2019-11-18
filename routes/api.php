@@ -58,7 +58,8 @@ Route::delete('/v0/ventas_delete/{nome_token_user?}/{data?}','VentaController@de
 Route::get('/v0/ventas_filtro/{nome_token_user?}/{data?}','VentaController@Filtro')->name('api.v0.ventas.filtro');
 Route::put('/v0/ventas_asignar_courier/{nome_token_user?}/{data?}','VentaController@asignar_courier')->name('api.v0.ventas.asignar_courier'); //paso dos de la venta
 Route::put('/v0/ventas_generar_pedido/{nome_token_user?}/{data?}','VentaController@generar_pedido')->name('api.v0.ventas.generar_pedido'); //paso dos de la venta
-Route::get('/v0/ventas_mi_historial_pediodos/{nome_token_user?}/{data?}','VentaController@mi_historial_pediodos')->name('api.v0.ventas.ventas_mi_historial');
+Route::get('/v0/ventas_mi_historial_pediodos/{nome_token_user?}/{data?}','VentaController@mi_historial_pediodos')->name('api.v0.ventas.ventas_mi_historial_pedidos');
+Route::get('/v0/ventas_mi_historial_entregas/{nome_token_user?}/{data?}','VentaController@mi_historial_entregas')->name('api.v0.ventas.ventas_mi_historial_entregas');
 
 Route::get('/v0/ventas_prueba','VentaController@prueba')->name('api.v0.ventas.prueba'); //paso dos de la venta
 //DETALLE DE VENTAS
