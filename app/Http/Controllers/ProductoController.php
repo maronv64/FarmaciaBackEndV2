@@ -6,6 +6,7 @@ use App\Producto;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Str;
+use Storage;
 
 class ProductoController extends Controller
 {
@@ -141,7 +142,7 @@ class ProductoController extends Controller
             } else {
 
                 $code = '200';
-                $items = Producto::where("nome_token",$request->nome_token)->first();
+                $items = Producto::where("id_foraneo",$request->nome_token)->first();
                 $message = 'OK';
 
             }
@@ -306,7 +307,7 @@ class ProductoController extends Controller
 
         }
 
-        $items = Producto::where([['estado_del','1'],['cantidad','>','0']])->get();
+        //$items = Producto::where([['estado_del','1'],['cantidad','>','0']])->get();
 
         $result =   array(
                         'items'     => $items,
@@ -317,6 +318,76 @@ class ProductoController extends Controller
         return response()->json($result);
     }
 
+    public function guardar_img($nome_token_user,Request $request)
+    {   
 
+        $code='';
+        $message ='';
+        $items ='';
+
+        // $items = Producto::where([["estado_del","1"],["descripcion","like","%$request->nome_token%"]])->get();
+        // return response()->json($items);
+
+        if (empty($nome_token_user)) {
+
+            $code='403';
+            $items = 'null';
+            $message = 'Forbidden: La solicitud fue legal, pero el servidor rehúsa responderla dado que el cliente no tiene los privilegios para hacerla. En contraste a una respuesta 401 No autorizado, la autenticación no haría la diferencia';
+
+        }else{
+
+            $validad = User::where('nome_token',$nome_token_user)->first();
+
+            if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
+                //no existe ese usuarios o fue dado de baja.
+            } else {
+
+                $consulta = Producto::where("id_foraneo",$request["id_foraneo"])->first();
+
+                try {
+        
+                    $file = $request->file('file_producto_img');
+                    $extension = $file->getClientOriginalExtension();
+                    $name='item_'.date('Ymd').time();
+                    $fileName = $name.'.'.$extension;
+        
+                    if (empty($consulta->file_name)) {   
+                    }else{unlink($consulta->file_ruta);}
+        
+                    $img = Storage::disk('imgDisk')->put($fileName,\File::get($file));
+                    $ruta = public_path()."/img/items/".$fileName;
+        
+                    $consulta->file_name=$name;
+                    $consulta->file_extension=$extension;
+                    $consulta->file_ruta=$ruta;
+        
+                    $consulta->update();
+
+                    $code = '200';
+                    $items = $consulta;
+                    $message = 'OK';
+
+                } catch (\Throwable $th) {
+                    
+                }                
+
+               
+
+            }
+
+        }
+
+        //$items = Producto::where([['estado_del','1'],['cantidad','>','0']])->get();
+
+        $result =   array(
+                        'items'     => $items,
+                        'code'      => $code,
+                        'message'   => $message
+                    );
+        //
+        return response()->json($result);        
+
+
+    }
 
 }

@@ -107,6 +107,7 @@ $('#btnVerFrmProductos').click(function (e) {
   GP_cargar_lista_productos('');
   GP_cargarTablaProductosBodega_2(0,'');
 	$('#cardProductos').show();
+	// GP_recorrer_tabla();
 	//cargar_frm_ventas();
 });
 

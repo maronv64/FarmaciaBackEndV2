@@ -38,4 +38,5 @@
 
 	</div>
 		@include('z_admin.Productos.z_modal')
+		@include('z_admin.Productos.z_modal_img')
 </div>

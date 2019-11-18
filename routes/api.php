@@ -58,7 +58,7 @@ Route::delete('/v0/ventas_delete/{nome_token_user?}/{data?}','VentaController@de
 Route::get('/v0/ventas_filtro/{nome_token_user?}/{data?}','VentaController@Filtro')->name('api.v0.ventas.filtro');
 Route::put('/v0/ventas_asignar_courier/{nome_token_user?}/{data?}','VentaController@asignar_courier')->name('api.v0.ventas.asignar_courier'); //paso dos de la venta
 Route::put('/v0/ventas_generar_pedido/{nome_token_user?}/{data?}','VentaController@generar_pedido')->name('api.v0.ventas.generar_pedido'); //paso dos de la venta
-Route::get('/v0/ventas_mi_historial/{nome_token_user?}/{data?}','VentaController@mi_historial')->name('api.v0.ventas.ventas_mi_historial');
+Route::get('/v0/ventas_mi_historial_pediodos/{nome_token_user?}/{data?}','VentaController@mi_historial_pediodos')->name('api.v0.ventas.ventas_mi_historial');
 
 Route::get('/v0/ventas_prueba','VentaController@prueba')->name('api.v0.ventas.prueba'); //paso dos de la venta
 //DETALLE DE VENTAS
@@ -69,10 +69,12 @@ Route::delete('/v0/detalle_ventas_delete/{nome_token_user?}/{data?}','DetalleVen
 Route::get('/v0/detalle_ventas_filtro/{nome_token_user?}/{data?}','DetalleVentaController@Filtro')->name('api.v0.detalle_ventas.filtro');
 // Route::post('/v0/detalle_ventas_asignar_venta/{nome_token_user?}/{data?}','DetalleVentaController@asignar_venta')->name('api.v0.detalle_ventas.asignar_venta');
 //PRODUCTOS
-Route::post('/v0/productos_store/{nome_token_user?}/{data?}','ProductoController@store')->name('api.v0.productos_ventas.store');
-Route::get('/v0/productos_show/{nome_token_user?}/{data?}','ProductoController@show')->name('api.v0.productos_ventas.show');
+Route::post('/v0/productos_store/{nome_token_user?}/{data?}','ProductoController@store')->name('api.v0.productos.store');
+Route::get('/v0/productos_show/{nome_token_user?}/{data?}','ProductoController@show')->name('api.v0.productos.show');
 // Route::get('/v0/productos_show_con_f/{nome_token_user?}/{data?}','ProductoController@show_con_f')->name('api.v0.productos_ventas.show_con_f');
 // Route::get('/v0/productos_show_con_f2/{data?}','ProductoController@show_con_f2')->name('api.v0.productos_ventas.show_con_f2');
-Route::put('/v0/productos_update/{nome_token_user?}/{data?}','ProductoController@update')->name('api.v0.productos_ventas.update');
-Route::delete('/v0/productos_delete/{nome_token_user?}/{data?}','ProductoController@destroy')->name('api.v0.productos_ventas.delete');
-Route::get('/v0/productos_filtro/{nome_token_user?}/{data?}','ProductoController@Filtro')->name('api.v0.productos_ventas.filtro');
+Route::put('/v0/productos_update/{nome_token_user?}/{data?}','ProductoController@update')->name('api.v0.productos.update');
+Route::delete('/v0/productos_delete/{nome_token_user?}/{data?}','ProductoController@destroy')->name('api.v0.productos.delete');
+Route::get('/v0/productos_filtro/{nome_token_user?}/{data?}','ProductoController@Filtro')->name('api.v0.productos.filtro');
+Route::post('/v0/productos_guardar_img/{nome_token_user?}/{data?}','ProductoController@guardar_img')->name('api.v0.productos.guardar_img');
+
