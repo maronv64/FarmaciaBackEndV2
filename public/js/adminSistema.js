@@ -116,3 +116,11 @@ $('#btnVerFrmReportes').click(function (e) {
 });
 
 //*****************************************************************************************************************************************************************************
+
+$('.ver_password').mousedown(function (e) {
+	$('.password').attr('type','text');
+});
+
+$('.ver_password').mouseup(function (e) {
+	$('.password').attr('type','password');
+});

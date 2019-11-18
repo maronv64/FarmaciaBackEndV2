@@ -428,6 +428,51 @@ class VentaController extends Controller
         return response()->json($result);
     }
 
+    public function mi_historial($nome_token_user='',Request $request)
+    {
+
+        $code='';
+        $message ='';
+        $items ='';
+
+        if (empty($nome_token_user)) {
+
+            $code='403';
+            $items = 'null';
+            $message = 'Forbidden: La solicitud fue legal, pero el servidor rehúsa responderla dado que el cliente no tiene los privilegios para hacerla. En contraste a una respuesta 401 No autorizado, la autenticación no haría la diferencia';
+
+        }else{
+
+            $validad = User::where('nome_token',$nome_token_user)->first();
+
+            if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
+                //no existe ese usuarios o fue dado de baja.
+            } else {
+
+                $code = '200';
+                $message = 'OK';
+               
+                $items = Venta::with('estado','cliente','courier','detalle')
+                                                                            ->where([["estado_del","1"],
+                                                                                    ["idcliente","$validad->id"],
+                                                                                    ["fecha","like","%$request->value%"]])
+                                                                            ->orderBy('idestado')
+                                                                            ->get();
+
+                
+            }
+
+        }
+
+        $result =   array(
+                        'items'     => $items,
+                        'code'      => $code,
+                        'message'   => $message
+                    );
+
+        return response()->json($result);
+    }
+    
     public function prueba()
     {
       $detalles = DetalleVenta::with('producto')->where([["estado_del","1"],['idventa',null],["idcliente","1"]])->get();
