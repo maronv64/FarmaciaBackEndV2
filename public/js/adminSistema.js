@@ -9,7 +9,8 @@ $( document ).ready(function() {
     // $('#btnVerFrmVentas').hide();
     ocultar();
     $('#fondo').show();
-    $('.form-control').attr('placeholder','');
+	$('.form-control').attr('placeholder','');
+	$('input[type=submit]').val(`Guardar`);
 });
 
 // function popover(nome_token){
@@ -125,3 +126,4 @@ $('.ver_password').mousedown(function (e) {
 $('.ver_password').mouseup(function (e) {
 	$('.password').attr('type','password');
 });
+

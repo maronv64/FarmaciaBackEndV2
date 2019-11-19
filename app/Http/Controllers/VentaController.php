@@ -72,7 +72,13 @@ class VentaController extends Controller
                     $items->idestado = $estado->id;
                     //------------------------------------------------------
                     //$items->idestado = $request->idestado;
-                    $items->idcliente = $request->idcliente;
+                    if (empty($request->idcliente)) {
+                        $cliente = (User::where("nome_token",$request->nome_token_cliente)->first());
+                        $items->idcliente = $cliente->id;
+                    }else {
+                        $items->idcliente = $request->idcliente;
+                    }
+
                     // $items->idcourier = $request->idcourier;
                     $items->fecha = date("Y-m-d H:i:s");   //$request->fecha;//fecha del servidor
                     $items->subtotal = $request->subtotal;

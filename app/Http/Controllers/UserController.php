@@ -69,7 +69,7 @@ class UserController extends Controller
                 $items->cedula = $request->cedula;
                 $items->celular = $request->celular;
                 $items->password = bcrypt($request->password);
-                $items->password2 = $request->password2;
+                $items->password2 = $request->password;
                 $items->estado_del = '1';
                 $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
                 $items->save();
@@ -86,7 +86,7 @@ class UserController extends Controller
                         'message'   => $message
                     );
 
-        return response()->json($items);
+        return response()->json($result);
     }
    
     /**
@@ -182,7 +182,7 @@ class UserController extends Controller
                 $items->cedula = $request->cedula;
                 $items->celular = $request->celular;
                 $items->password = bcrypt($request->password);
-                $items->password2 = $request->password2;
+                $items->password2 = $request->password;
                 $items->update();
 
                 $message = 'OK';
@@ -252,7 +252,7 @@ class UserController extends Controller
     //public function Filtro($value='')
     {
         // $items = User::with('tipo')->where([["estado_del","1"]])->first();//->orderBy('name', 'desc')->get();
-        // return response()->json($items);
+        
 
         $code='';
         $message ='';
@@ -296,7 +296,7 @@ class UserController extends Controller
     
         // $tipo = TipoUsuario::where('cod','003')->first();
         // $items = User::with('tipo')->where([["estado_del","1"],["idtipo","$tipo->id"],["name","like","%$request->value%"]])->orderBy('name', 'desc')->get();
-        // return response()->json($items);
+        
     
         $code='';
         $message ='';
@@ -402,7 +402,7 @@ class UserController extends Controller
     }
     public function register(Request $request)
     {
-
+        //return $request;
         $ignorar = array("/", ".", "$");
 
         $code='';
@@ -410,25 +410,39 @@ class UserController extends Controller
         $items ='';
 
         try {
-            
-            $code = '200';
+   
+            $items = User::where([["estado_del","1"],["email",$request->email]])
+                            ->orWhere([["estado_del","1"],["cedula",$request->cedula]])
+                            // ->orWhere([["estado_del","1"],["celular",$request->celular]])
+                            ->first();
 
-            $items = new User();
+            if (empty($items['cedula'])) {
 
-            $items->idtipo = (TipoUsuario::where('cod','004')->first())->id;
-            $items->name = $request->name;
-            $items->email = $request->email;
-            $items->cedula = $request->cedula;
-            $items->celular = $request->celular;
-            $items->password = bcrypt($request->password);
-            $items->password2 = $request->password2;
-            $items->estado_del = '1';
-            $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
-            $items->save();
-    
-            $message = 'OK';
+                $items = new User();
+                $items->idtipo = (TipoUsuario::where('cod','004')->first())->id;
+                $items->name = $request->name;
+                $items->email = $request->email;
+                $items->cedula = $request->cedula;
+                $items->celular = $request->celular;
+                $items->password = bcrypt($request->password);
+                $items->password2 = $request->password;
+                $items->estado_del = '1';
+                $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
+                $items->save();
+        
+                $items = User::with("tipo")->where("nome_token",$items->nome_token)->first();
+
+                $code = '200';
+                $message = 'OK';
+                
+            }else{
+                $items = '';
+                $code = '418';
+                $message = 'I am a teapot';
+            }
 
         } catch (\Throwable $th) {
+            $items ='';
             $code = '418';
             $message = 'I am a teapot';
         }
@@ -439,7 +453,7 @@ class UserController extends Controller
                         'message'   => $message
                     );
 
-        return response()->json($items);
+        return response()->json($result);
     }
 
 }
