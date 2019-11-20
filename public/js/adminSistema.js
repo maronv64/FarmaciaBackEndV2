@@ -44,7 +44,11 @@ function mostrar(argument) {
 }
 
 function limpiar() {
-	$('.limpiar').val('');
+	$('input[type="text"]').val(null);
+	$('input[type="email"]').val(null);
+	$('input[type="password"]').val(null);
+	// $('.password').attr('type','text');
+
 }
 
 function cargarMenu() {
@@ -69,6 +73,7 @@ function cargarMenu() {
 //boton TipoUsuarios
 $('#btnVerFrmTipoUsuarios').click(function (e) {
 	ocultar();
+	limpiar();
   cargar_tablaTipoUsuarios('');
 	$('#cardTipoUsuarios').show();
 	//cargar_frm_tipo_usuarios();
@@ -77,6 +82,7 @@ $('#btnVerFrmTipoUsuarios').click(function (e) {
 //boton Usuarios
 $('#btnVerFrmUsuarios').click(function (e) {
 	ocultar();
+	limpiar();
   cargar_cmbTipoUsuario();
   cargar_tablaUsuarios('');
 	$('#cardUsuarios').show();
@@ -127,3 +133,7 @@ $('.ver_password').mouseup(function (e) {
 	$('.password').attr('type','password');
 });
 
+$('.password').keyup(function (e) {
+	
+	$('.password').attr('type','password');
+});
