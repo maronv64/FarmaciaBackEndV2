@@ -40,4 +40,7 @@ class User extends Authenticatable
     public function tipo(){
         return $this->hasOne('App\TipoUsuario','id','idtipo');
     }
+    public function ubicacion(){
+        return $this->hasMany('App\Ubicacion','idusuario','id');
+    }
 }

@@ -117,7 +117,7 @@ class UserController extends Controller
             } else {
 
                 $code = '200';
-                $items = User::with('tipo')->where("nome_token",$request->nome_token)->first();
+                $items = User::with(['tipo','ubicacion'])->where("nome_token",$request->nome_token)->first();
                 $message = 'OK';
 
             }

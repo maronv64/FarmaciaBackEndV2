@@ -44,6 +44,11 @@ Route::get('/v0/prueba','UserController@prueba')->name('api.v0.prueba.prueba');
 Route::get('/v0/login/{data?}','UserController@login')->name('api.v0.usuarios.login');
 Route::post('/v0/register/{data?}','UserController@register')->name('api.v0.usuarios.register');
 
+// UBICACION DE USUARIOS--------------------------------------------------------------------------------------------------------------------------------
+Route::post('/v0/ubicacion_store/{nome_token_user?}/{data?}','UbicacionController@store')->name('api.v0.ubicacion.store');
+
+
+
 //ESTADO VENTA
 Route::post('/v0/estado_ventas_store/{nome_token_user?}/{data?}','EstadoVentaController@store')->name('api.v0.estado_ventas.store');
 Route::get('/v0/estado_ventas_show/{nome_token_user?}/{data?}','EstadoVentaController@show')->name('api.v0.estado_ventas.show');
