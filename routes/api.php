@@ -84,3 +84,13 @@ Route::delete('/v0/productos_delete/{nome_token_user?}/{data?}','ProductoControl
 Route::get('/v0/productos_filtro/{nome_token_user?}/{data?}','ProductoController@Filtro')->name('api.v0.productos.filtro');
 Route::post('/v0/productos_guardar_img/{nome_token_user?}/{data?}','ProductoController@guardar_img')->name('api.v0.productos.guardar_img');
 
+
+
+//DPF
+
+Route::get('/v0/pdf', function () {
+    $pdf = PDF::loadView('z_reportes.a_cuerpo');
+  // $pdf = PDF::loadHtml("pdf");
+   return $pdf->stream();
+//    return $pdf->download();
+});

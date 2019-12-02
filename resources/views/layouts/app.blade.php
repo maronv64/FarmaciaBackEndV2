@@ -13,6 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/sweetalert.min.js') }}" defer></script>
     <script src="{{ asset('js/jquery.dataTables.js') }}" defer></script>
+    <script src="{{ asset('js/jQuery.print/jQuery.print.js') }}" defer></script>
     <script src="{{ asset('js/adminSistema.js') }}" defer></script>
     {{--<script src="{{ asset('js/bootstrap-toggle.js') }}" defer></script>--}
     <!-- Fonts -->
@@ -83,6 +84,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fa fa-user-o" aria-hidden="true"></i>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 

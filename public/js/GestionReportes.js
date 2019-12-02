@@ -48,3 +48,41 @@ function generarPDF() {
   doc.text(html, 10, 10)
   doc.save('a4.pdf')
 }
+
+
+var doc = new jsPDF();
+var specialElementHandlers = {
+    '#editor': function (element, renderer) {
+        return true;
+    }
+};
+
+$('#cmd').on("click",function (e) {
+
+    e.preventDefault();
+
+    doc.fromHTML($('#content').html(), 15, 15, {
+        'width': 170,
+            'elementHandlers': specialElementHandlers
+    });
+    doc.save('sample-file.pdf');
+});
+
+$("#jqueryPrinf").on("click",function (e) {
+  e.preventDefault();
+  $("#content").print({
+    globalStyles: true,
+    mediaPrint: false,
+    stylesheet: null,
+    noPrintSelector: ".no-print",
+    iframe: true,
+    append: null,
+    prepend: null,
+    manuallyCopyFormValues: true,
+    deferred: $.Deferred(),
+    timeout: 750,
+    title: null,
+    doctype: '<!doctype html>'
+  });
+});
+

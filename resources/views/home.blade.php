@@ -38,8 +38,19 @@
     <script src="{{ asset('js/GestionUsuarios.js') }}" defer></script>
     <script src="{{ asset('js/GestionPedidos.js') }}" defer></script>
     <script src="{{ asset('js/GestionVentas.js') }}" defer></script>
-    <script src="{{ asset('js/GestionProductosJSON.js') }}" defer></script>
-    {{-- <script src="{{ asset('js/GestionProductos.js') }}" defer></script>--}}
+    {{-- <script src="{{ asset('js/GestionProductosJSON.js') }}" defer></script> --}}
+    <script src="{{ asset('js/GestionProductos.js') }}" defer></script>
     <script src="{{ asset('js/GestionReportes.js') }}" defer></script>
+    <script>
+        function printDiv(nombreDiv) {
+            var contenido= document.getElementById(nombreDiv).innerHTML;
+            var contenidoOriginal= document.body.innerHTML;
 
+            document.body.innerHTML = contenido;
+
+            window.print();
+
+            document.body.innerHTML = contenidoOriginal;
+        }
+    </script>
 @endsection
