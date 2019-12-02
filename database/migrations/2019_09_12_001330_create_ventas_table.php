@@ -14,9 +14,9 @@ class CreateVentasTable extends Migration
     public function up()
     {
         Schema::create('ventas', function (Blueprint $table) {
-            
+
             $table->bigIncrements('id');
-            
+
             $table->unsignedBigInteger('idestado');
             $table->unsignedBigInteger('idcliente');
             $table->unsignedBigInteger('idcourier')->nullable();
@@ -26,6 +26,11 @@ class CreateVentasTable extends Migration
             $table->string('total')->nullable();
 
             $table->string('estado_del','1')->default('1');
+
+            $table->string('ubicacion_descripcion')->nullable();
+            $table->string('ubicacion_latitud')->nullable();
+            $table->string('ubicacion_longitud')->nullable();
+
             $table->string('nome_token');
             $table->timestamps();
 

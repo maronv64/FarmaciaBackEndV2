@@ -8,18 +8,27 @@
 
 		  <div class="form-group row">
 		    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Tipo de Reporte:</label>
+<<<<<<< HEAD
 		    <div class="col-sm-9">
+=======
+		    <div class="col-sm-8">
+>>>>>>> a6f6e80e0b442bb460053f255db48aaaea654869
 		      <select class="form-control form-control-sm" id="cmb_tipo_reporte" placeholder="col-form-label-sm" required>
             <option value="usuarios" selected>Usuarios</option>
             <option value="pedidos">Pedidos</option>
             <option value="ventas">Ventas</option>
           </select>
         </div>
+<<<<<<< HEAD
         <div class="col-sm-1">
+=======
+        <div class="col-sm-2">
+>>>>>>> a6f6e80e0b442bb460053f255db48aaaea654869
           <button  onclick="printDiv('areaImprimir')" class="form-control form-control-sm btn btn-sm btn-primary">Imprimir</button>
         </div>
 		  </div>
 
+<<<<<<< HEAD
       
       <div id="content">
           <img src="<?php echo asset('')?>img/logo3.png" alt="">
@@ -33,6 +42,24 @@
 
       <div  id="ReporteContenido">
         <iframe id="areaImprimir" height="500px" width="100%" src="" frameborder="0" hidden></iframe>
+=======
+
+
+      <div id="content">
+          <img height="50px" width="50px" src="<?php echo asset('img/logo3.png')?>" alt="">
+          <h3 class="text-primary">Hello, this is a H3 tag</h3>
+
+         <p>A paragraph</p>
+     </div>
+     <div id="editor"></div>
+     <button id="cmd">generarPDF jPDF con HTML</button>
+     <button id="jqueryPrinf">generarPDF jqueryPrinf con HTML</button>
+
+
+      <div  class="bg-primary"  id="ReporteContenido">
+        <img id="areaImprimir" src="<?php echo asset('img/logo3.png')?>" alt="">
+
+>>>>>>> a6f6e80e0b442bb460053f255db48aaaea654869
       </div>
 
       <a tabindex="0" class="btn btn-sm btn-primary popover-dismiss" style="border-radius: 100%;" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-circle-o-notch" aria-hidden="true"></i></a>
@@ -41,7 +68,11 @@
       <button class="btn btn-sm btn-primary" style="border-radius: 100%;" type="button" name="button"> <i class="fa fa-circle-o-notch" aria-hidden="true"></i> </button>
 
 
+<<<<<<< HEAD
       <button type="button" name="button" onclick="generarPDF();">Generar PDF</button>
+=======
+      <button type="button" name="button" onclick="generarPDF();">Generar jPDF</button>
+>>>>>>> a6f6e80e0b442bb460053f255db48aaaea654869
 
       <a href="api/v0/produtosjs">ir a login</a>
 

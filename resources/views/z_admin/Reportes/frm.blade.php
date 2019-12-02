@@ -8,13 +8,19 @@
 
 		  <div class="form-group row">
 		    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Tipo de Reporte:</label>
+<<<<<<< HEAD
 		    <div class="col-sm-9">
 		      <select class="form-control form-control-sm" id="cmb_tipo_reporte" placeholder="col-form-label-sm" required>
+=======
+		    <div class="col-sm-8">
+		      <select id="cmbTipoReporte" class="form-control form-control-sm" id="cmb_tipo_reporte" placeholder="col-form-label-sm" required>
+>>>>>>> a6f6e80e0b442bb460053f255db48aaaea654869
             <option value="usuarios" selected>Usuarios</option>
             <option value="pedidos">Pedidos</option>
             <option value="ventas">Ventas</option>
           </select>
         </div>
+<<<<<<< HEAD
         <div class="col-sm-1">
           <button  onclick="printDiv('areaImprimir')" class="form-control form-control-sm btn btn-sm btn-primary">Imprimir</button>
         </div>
@@ -60,13 +66,20 @@
 		    </div>
 		  </div> -->
 
+=======
+        <div class="col-sm-2">
+          <button id="jqueryPrinf" class="form-control form-control-sm btn btn-sm btn-primary">Imprimir</button>
+        </div>
+		  </div>
+
+>>>>>>> a6f6e80e0b442bb460053f255db48aaaea654869
 		</form>
 
     </div>
 
 	<div class="card-footer">
-		{{--@include('z_admin.Reportes.tabla')
-		@include('z_admin.Reportes.z_modal')--}}
+		@include('z_admin.Reportes.tabla')
+		{{--@include('z_admin.Reportes.z_modal')--}}
 	</div>
 
 </div>
