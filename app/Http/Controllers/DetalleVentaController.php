@@ -72,10 +72,13 @@ class DetalleVentaController extends Controller
                     $items->precio_u = $producto->precio;
                     $items->cantidad = $request->cantidad; //se necesita
                     $items->subtotal = $producto->precio*$request->cantidad;
+                    // for ($i=0; $i < $request->cantidad; $i++) {
+                    //   $items->subtotal+=$producto->precio;
+                    // }
                     $items->estado_del = '1';
                     $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
                     $items->save();
-   
+
                     $items = DetalleVenta::with('producto')->where('id',$items->id)->first();
                 }else{
                     $cantidadTotal = ($request->cantidad+$items->cantidad);
@@ -86,7 +89,7 @@ class DetalleVentaController extends Controller
                     $items->update();
                 }
 
-                
+
 
                 // if (empty($items['idventa']) ){
 

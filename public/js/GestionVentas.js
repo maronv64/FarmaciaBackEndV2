@@ -35,7 +35,7 @@ function cargar_tablaVentas(value='') {
 
 function crear_tablaVentas(data) {
 	//swal('hola');
-  	$('#tablaVentas').html('');
+  	$('#tablaVentas_reporte').html('');
 
 
 	$.each(data.items, function(a, item) { // recorremos cada uno de los datos que retorna el objero json n valores
@@ -56,7 +56,7 @@ function crear_tablaVentas(data) {
 	    </tr>
 	  `;
 
-	    $('#tablaVentas').append(fila);
+	    $('#tablaVentas_reporte').append(fila);
 
 	});
 
@@ -330,4 +330,3 @@ function crear_venta_modal(data) {
     `;
     $('#tabla_infor_venta').html(fila);
 }
-

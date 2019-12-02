@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <br>
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
@@ -14,11 +15,13 @@
                       </div>
                       <div class="col-6">
                         <br>
-                        <img class="img-fluid" src="{{ asset('img/login1.jpg' )}}" alt="">
+                        <img class="img-fluid" src="{{ asset('img/login1.png' )}}" alt="">
                       </div>
                       <div class="col-3">
                       </div>
                     </div>
+
+                    <br>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

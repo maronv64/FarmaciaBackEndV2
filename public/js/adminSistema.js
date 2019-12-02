@@ -11,6 +11,9 @@ $( document ).ready(function() {
     $('#fondo').show();
 	$('.form-control').attr('placeholder','');
 	$('input[type=submit]').val(`Guardar`);
+
+  // $('.col-form-label').append(`<strong>${$('.col-form-label').val()}</strong>`);
+
 });
 
 // function popover(nome_token){
@@ -134,6 +137,6 @@ $('.ver_password').mouseup(function (e) {
 });
 
 $('.password').keyup(function (e) {
-	
+
 	$('.password').attr('type','password');
 });

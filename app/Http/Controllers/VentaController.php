@@ -85,6 +85,16 @@ class VentaController extends Controller
                     $items->total = $request->total;
                     $items->estado_del = '1';
                     $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
+
+                    try {
+                      $items->ubicacion_descripcion=$request->ubicacion_descripcion;
+                    } catch (\Exception $e) {
+
+                    }
+                                        
+                    $items->ubicacion_latitud=$request->ubicacion_latitud;
+                    $items->ubicacion_longitud=$request->ubicacion_longitud;
+
                     $items->save();
 
                     $message = 'OK';
@@ -457,7 +467,7 @@ class VentaController extends Controller
 
                 $code = '200';
                 $message = 'OK';
-               
+
                 $items = Venta::with('estado','cliente','courier','detalle')
                                                                             ->where([["estado_del","1"],
                                                                                     ["idcliente","$validad->id"],
@@ -465,7 +475,7 @@ class VentaController extends Controller
                                                                             ->orderBy('idestado')
                                                                             ->get();
 
-                
+
             }
 
         }
@@ -480,7 +490,7 @@ class VentaController extends Controller
     }
     public function mi_historial_entregas($nome_token_user='',Request $request)
     {
-        
+
         $code='';
         $message ='';
         $items ='';
@@ -501,7 +511,7 @@ class VentaController extends Controller
 
                 $code = '200';
                 $message = 'OK';
-               
+
                 $items = Venta::with('estado','cliente','courier','detalle')
                                                                             ->where([["estado_del","1"],
                                                                                     ["idcourier","$validad->id"],
@@ -509,7 +519,7 @@ class VentaController extends Controller
                                                                             ->orderBy('idestado')
                                                                             ->get();
 
-                
+
             }
 
         }
