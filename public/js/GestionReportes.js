@@ -86,8 +86,6 @@ $("#jqueryPrinf").on("click",function (e) {
   });
 });
 
-<<<<<<< HEAD
-=======
 $('#cmbTipoReporte').change(function (e) {
 
   if ($('#cmbTipoReporte').val()=="ventas") {
@@ -145,4 +143,3 @@ function crear_reportes_tablaVentas(data) {
   });
 
 }
->>>>>>> a6f6e80e0b442bb460053f255db48aaaea654869
