@@ -9,6 +9,7 @@ use App\EstadoVenta;
 use Illuminate\Support\Str;
 use App\DetalleVenta;
 use App\Producto;
+use App\TipoUsuario;
 
 class VentaController extends Controller
 {
@@ -310,6 +311,106 @@ class VentaController extends Controller
 
                 //dd($items);
                 $message = 'OK';
+
+            }
+
+        }
+
+        $result =   array(
+                        'items'     => $items,
+                        'code'      => $code,
+                        'message'   => $message
+                    );
+
+        return response()->json($result);
+    }
+
+    public function rechazar_entrega($nome_token_user='',Request $request)
+    {
+        $code='';
+        $message ='';
+        $items ='';
+        // return response()->json($request);
+        if (empty($nome_token_user)) {
+
+            $code='403';
+            $items = 'null';
+            $message = 'Forbidden: La solicitud fue legal, pero el servidor rehúsa responderla dado que el cliente no tiene los privilegios para hacerla. En contraste a una respuesta 401 No autorizado, la autenticación no haría la diferencia';
+
+        }else{
+
+            $validad = User::where('nome_token',$nome_token_user)->first();
+
+            if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
+                //no existe ese usuarios o fue dado de baja.
+            } else {
+
+                try {
+                    //buscar la venta con el token enviado desde la app
+                    $venta = Venta::where("nome_token",$request->nome_token)->first();
+
+                    $code = '200';
+                    $message = 'OK';
+                    $tipo = TipoUsuario::where('cod','003')->first();
+                    $otroCourier = User::where([['idtipo',$tipo->id],['estado_del','1'],['nome_token','<>',$nome_token_user]])->first();
+                    $venta->idcourier=$otroCourier->id;
+                    $venta->update();
+                    $items = Venta::with('estado','cliente','courier','detalle')->where("nome_token",$venta->nome_token)->first();
+
+                } catch (\Throwable $th) {
+                    $code = '418';
+                    $message = 'I am a teapot';
+                }
+
+            }
+
+        }
+
+        $result =   array(
+                        'items'     => $items,
+                        'code'      => $code,
+                        'message'   => $message
+                    );
+
+        return response()->json($result);
+    }
+
+    public function finalizar_venta($nome_token_user='',Request $request)
+    {
+        $code='';
+        $message ='';
+        $items ='';
+        // return response()->json($request);
+        if (empty($nome_token_user)) {
+
+            $code='403';
+            $items = 'null';
+            $message = 'Forbidden: La solicitud fue legal, pero el servidor rehúsa responderla dado que el cliente no tiene los privilegios para hacerla. En contraste a una respuesta 401 No autorizado, la autenticación no haría la diferencia';
+
+        }else{
+
+            $validad = User::where('nome_token',$nome_token_user)->first();
+
+            if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
+                //no existe ese usuarios o fue dado de baja.
+            } else {
+
+                try {
+                    //buscar la venta con el token enviado desde la app
+                    $venta = Venta::where("nome_token",$request->nome_token)->first();
+
+                    $code = '200';
+                    $message = 'OK';
+                    $items = Venta::with('estado','cliente','courier','detalle')->where("nome_token",$request->nome_token)->first();
+                    $estado = EstadoVenta::where('cod','003')->first();
+                    $items->idestado=$estado->id;
+                    $items->fecha_f = date("Y-m-d H:i:s");  
+                    $items->update();
+
+                } catch (\Throwable $th) {
+                    $code = '418';
+                    $message = 'I am a teapot';
+                }
 
             }
 

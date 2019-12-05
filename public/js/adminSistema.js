@@ -11,7 +11,7 @@ $( document ).ready(function() {
     $('#fondo').show();
 	$('.form-control').attr('placeholder','');
 	$('input[type=submit]').val(`Guardar`);
-
+	$('#btnGuardarImagenProducto').attr('hidden',true);
   // $('.col-form-label').append(`<strong>${$('.col-form-label').val()}</strong>`);
 
 });

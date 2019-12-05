@@ -36,7 +36,7 @@
     
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <input type="submit" class="btn btn-primary" value="Guardar"> <!-- data-dismiss="modal" -->
+                <input id="btnGuardarImagenProducto" type="submit" class="btn btn-primary" value="Guardar"> <!-- data-dismiss="modal" -->
                 </div>
             </form>
 

@@ -300,7 +300,7 @@ class ProductoController extends Controller
             } else {
 
                 $code = '200';
-                $items = Producto::where([["estado_del","1"],['cantidad','>','0'],["descripcion","like","%$request->nome_token%"]])->get();
+                $items = Producto::where([["estado_del","1"],['cantidad','>','0'],["descripcion","like","%$request->nome_token%"]])->orderBy('created_at','desc')->get();
                 $message = 'OK';
 
             }

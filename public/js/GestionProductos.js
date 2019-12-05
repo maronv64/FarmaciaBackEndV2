@@ -489,6 +489,7 @@ function GP_agregar_imagen_producto(id_foraneo){
 
 //enctype="multipart/form-data"
 $('#file_producto_img').change(function (e) {
+  $('#btnGuardarImagenProducto').attr('hidden',false);
   //console.log($(this).val());
   //$('#iframe_producto_img').attr('src',$(this).val());
 });
@@ -567,7 +568,7 @@ $('#frmProductos_img_modificar').on('submit',function (e) {
           // $('#iframe_producto_img').attr('height','100%');
           $('#iframe_producto_img').attr('src',`/img/items/${data.items.file_name}.${data.items.file_extension}`);
           // $('#iframe_producto_img').append(`<img height="100%" width="100%" src="/img/items/${data.items.file_name}.${data.items.file_extension}" alt="">`);
-          
+          $('#btnGuardarImagenProducto').attr('hidden',true);
         
         },
         error: function () {
