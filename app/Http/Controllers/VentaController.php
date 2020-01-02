@@ -92,7 +92,7 @@ class VentaController extends Controller
                     } catch (\Exception $e) {
 
                     }
-                                        
+
                     $items->ubicacion_latitud=$request->ubicacion_latitud;
                     $items->ubicacion_longitud=$request->ubicacion_longitud;
 
@@ -249,17 +249,19 @@ class VentaController extends Controller
 
         }else{
 
-            $validad = User::where('nome_token',$nome_token_user)->first();
+            $validad = User::with('tipo')->where('nome_token',$nome_token_user)->first();
 
             if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
                 //no existe ese usuarios o fue dado de baja.
             } else {
+                if ($validad->tipo->cod=="001") {
+                  $code = '200';
+                  $items = Venta::where("nome_token",$request->nome_token)->first();
+                  $items->estado_del='0';
+                  $items->update();
+                  $message = 'OK';  
+                }
 
-                $code = '200';
-                $items = Venta::where("nome_token",$request->nome_token)->first();
-                $items->estado_del='0';
-                $items->update();
-                $message = 'OK';
 
             }
 
@@ -404,7 +406,7 @@ class VentaController extends Controller
                     $items = Venta::with('estado','cliente','courier','detalle')->where("nome_token",$request->nome_token)->first();
                     $estado = EstadoVenta::where('cod','003')->first();
                     $items->idestado=$estado->id;
-                    $items->fecha_f = date("Y-m-d H:i:s");  
+                    $items->fecha_f = date("Y-m-d H:i:s");
                     $items->update();
 
                 } catch (\Throwable $th) {

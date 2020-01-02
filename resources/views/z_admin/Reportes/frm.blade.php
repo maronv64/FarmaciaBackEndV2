@@ -7,18 +7,32 @@
 		<form id="frmReportes" class="needs-validation">
 
 		  <div class="form-group row">
-		    <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Tipo de Reporte:</label>
-		    <div class="col-sm-8">
+		    <label for="colFormLabelSm" class="col-sm-4 col-md-4 col-lg-3 col-form-label col-form-label-sm">Tipo de Reporte:</label>
+		    <div class="col-sm-8 col-md-8 col-lg-9">
 		      <select id="cmbTipoReporte" class="form-control form-control-sm" id="cmb_tipo_reporte" placeholder="col-form-label-sm" required>
             <option value="usuarios" selected>Usuarios</option>
             <option value="pedidos">Pedidos</option>
             <option value="ventas">Ventas</option>
           </select>
         </div>
-        <div class="col-sm-2">
-          <button id="jqueryPrinf" class="form-control form-control-sm btn btn-sm btn-primary">Imprimir</button>
-        </div>
+
 		  </div>
+      <div class="form-group row">
+        <label for="colFormLabelSm" class="col-sm-4 col-md-4 col-lg-3 col-form-label col-form-label-sm">Fecha de Inicio:</label>
+        <div class="col-sm-8 col-md-8 col-lg-3">
+		      <input type="date" id="cmbTipoReporte" class="form-control form-control-sm" id="cmb_tipo_reporte" placeholder="col-form-label-sm" required>
+        </div>
+        <label for="colFormLabelSm" class="col-sm-4 col-md-4 col-lg-3 col-form-label col-form-label-sm">Fecha de Inicio:</label>
+        <div class="col-sm-8 col-md-8 col-lg-3">
+		      <input type="date" id="cmbTipoReporte" class="form-control form-control-sm" id="cmb_tipo_reporte" placeholder="col-form-label-sm" required>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-12">
+            <button id="jqueryPrinf" class="form-control form-control-sm btn btn-sm btn-primary">Imprimir</button>
+        </div>
+      </div>
 
 		</form>
 

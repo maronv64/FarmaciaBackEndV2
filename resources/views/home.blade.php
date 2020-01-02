@@ -4,10 +4,12 @@
 <div class="container">
     <div class="row justify-content-center">
 
-        @include('z_admin.z_menu')
 
+        <div class="col-md-3 col-lg-2">
+          @include('z_admin.z_menu')
+        </div>
         <!-- <div id="ops"> -->
-        <div class="col-md-10">
+        <div class="col-md-9 col-lg-10">
             <div id="op">
                 @include('z_admin.TipoUsuarios.frm')
                 @include('z_admin.Usuarios.frm')

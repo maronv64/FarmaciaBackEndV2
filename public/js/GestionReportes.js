@@ -1,5 +1,7 @@
 $( document ).ready(function(e) {
   // console.log($('#cmb_tipo_reporte').val());
+  $('#tabla_reporte_head').html('');
+  $('#tabla_reporte_body').html('');
 });
 
 $('#cmb_tipo_reporte').change(function (e) {
@@ -88,6 +90,9 @@ $("#jqueryPrinf").on("click",function (e) {
 
 $('#cmbTipoReporte').change(function (e) {
 
+  $('#tabla_reporte_head').html('');
+  $('#tabla_reporte_body').html('');
+
   if ($('#cmbTipoReporte').val()=="ventas") {
     var FrmData=
     {
@@ -107,7 +112,7 @@ $('#cmbTipoReporte').change(function (e) {
       success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
       {
           // crear_tablaVentas(data);
-          crear_reportes_tablaVentas(data);
+          crear_reportes_tabla(data);
       },
       error: function () {
           mensaje = "OCURRIO UN ERROR: Archivo->GestionReportes.js , funcion->cargar_tablaVentas()";
@@ -117,8 +122,20 @@ $('#cmbTipoReporte').change(function (e) {
   }
 });
 
-function crear_reportes_tablaVentas(data) {
-  $('#tablaVentas_reporte').html('');
+function crear_reportes_tabla(data) {
+
+  $('#tabla_reporte_head').html('');
+  $('#tabla_reporte_body').html('');
+
+  $('#tabla_reporte_head').append(
+    `<tr>
+        <th scope="col">#</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Courier</th>
+        <th scope="col">Total</th>
+    </tr>`
+  );
 
   $.each(data.items, function(a, item) { // recorremos cada uno de los datos que retorna el objero json n valores
 
@@ -129,16 +146,11 @@ function crear_reportes_tablaVentas(data) {
           <td><input type="hidden" value="${item.fecha}">${item.fecha}</td>
           <td><input type="hidden" value="${item.cliente.name}">${item.cliente.name}</td>
           <td><input type="hidden" value="${item.courier.name}">${item.courier.name}</td>
-          <td><input type="hidden" value="${item.total}">${item.total}</td>
-          <td><input type="hidden" value="${item.estado.descripcion}">${item.estado.descripcion}</td>
-          <td>
-            <button type="button" class="btn btn-sm btn-outline-info" onclick="ventas_ver_modal('${item.nome_token}')" data-toggle="modal" >Modificar</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="ventas_eliminar('${item.nome_token}')">Eliminar</button>
-          </td>
+          <td><input type="hidden" value="${item.total}">${parseFloat(item.total).toFixed(3)}</td>
       </tr>
     `;
 
-      $('#tablaVentas_reporte').append(fila);
+      $('#tabla_reporte_body').append(fila);
 
   });
 

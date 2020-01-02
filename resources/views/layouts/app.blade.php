@@ -55,7 +55,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand text-white" href="{{ url('/') }}">
+                <a class="navbar-brand text-white" href="{{ url('/home') }}">
                   <img style="width:25px" src="{{asset('img/logo3.png')}}" alt="">
                     {{ "Farmacias Cruz Azul" }}
                 </a>

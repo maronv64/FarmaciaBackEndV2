@@ -94,7 +94,7 @@ var listaProductos = [];
 //               title: 'COD. BARRAS',
 //               width: ancho,
 //               data: 'item.cod_barra'
-              
+
 //           },
 //           {
 //               title: 'NOMBRE',
@@ -176,19 +176,19 @@ function GP_crearTablaProductosBodega_v2(data) {
                 //     $(td).append(`<label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" checked="true" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>`);
                 //     $(td).append(`<button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>`);
                 //     $(td).append(`<button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>`);
-                  
+
                 //     // debugger
                 //   }
-                  
+
                 // });
 
                 // if (existe==false) {
                 //   $(td).append(`<label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>`);
                 //   $(td).append(`<button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>`);
                 //   $(td).append(`<button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>`);
-                  
+
                 // }
-                                    
+
              },
           }
        ],
@@ -197,7 +197,7 @@ function GP_crearTablaProductosBodega_v2(data) {
               title: 'COD. BARRAS',
               width: ancho,
               data: 'item.cod_barra'
-              
+
           },
           {
               title: 'NOMBRE',
@@ -224,7 +224,7 @@ function GP_crearTablaProductosBodega_v2(data) {
               render: function (data, type, row) {
 
                 var html ="";
-                var existe = false;                
+                var existe = false;
                 // var html = `
 
                 //   <label class="col-xs switch"><input id="checkbox_${data.id_item_bodega}" onclick="GP_escoger_producto(${data.id_item_bodega})" type="checkbox"><span class="slider round"></span></label>
@@ -232,7 +232,7 @@ function GP_crearTablaProductosBodega_v2(data) {
                 //   <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
 
                 // `;
-                
+
                 //checkeds(data.id_item_bodega);
 
                 $.each(lista_productos,function (a,item) {
@@ -245,9 +245,9 @@ function GP_crearTablaProductosBodega_v2(data) {
                       <button type="button" class="col-xs btn btn-sm btn-outline-info" onclick="GP_verModalProductos(${data.id_item_bodega})"><i class="fa fa-eye" aria-hidden="true"></i></button>
                       <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
                     `;
-                    
+
                   }
-                  
+
                 });
 
                 if (existe==false) {
@@ -258,12 +258,12 @@ function GP_crearTablaProductosBodega_v2(data) {
                     <button id="boton_p_${data.id_item_bodega}" class="col-xs btn btn-sm btn-outline-info" hidden="true" onclick="GP_agregar_imagen_producto(${data.id_item_bodega})"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
                   `;
 
-                  
+
 
                 }
                 return `${html}`;
                  //return `<button>hola</button>`;
-                 
+
               }
           }
       ],
@@ -489,6 +489,13 @@ function GP_agregar_imagen_producto(id_foraneo){
 
 //enctype="multipart/form-data"
 $('#file_producto_img').change(function (e) {
+  archivo = "Seleccione un Archivo";
+  if (this.files.length>0) {
+    archivo =(this.files[0].name);
+    $(`#file_producto_img_label`).html(`${archivo}`);
+    $('#iframe_producto_img').attr('src',`${URL.createObjectURL(e.target.files[0])}`);
+
+  }
   $('#btnGuardarImagenProducto').attr('hidden',false);
   //console.log($(this).val());
   //$('#iframe_producto_img').attr('src',$(this).val());
@@ -513,27 +520,27 @@ function GP_preview_producto_img(id_foraneo) {
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
       console.log(data);
-      
+
       if (data.items.file_name == null) {
-        $('#iframe_producto_img').attr('src',`/img/fondo3.jpg`); 
+        $('#iframe_producto_img').attr('src',`/img/fondo3.jpg`);
       }else{
         // $(`#file_producto_img_label`).val();
-        $('#iframe_producto_img').attr('src',`/img/items/${data.items.file_name}.${data.items.file_extension}`); 
+        $('#iframe_producto_img').attr('src',`/img/items/${data.items.file_name}.${data.items.file_extension}`);
       }
     },
     error: function () {
-      $('#iframe_producto_img').attr('src',`/img/fondo3.jpg`); 
+      $('#iframe_producto_img').attr('src',`/img/fondo3.jpg`);
 
         // mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->GP_preview_producto_img()";
         // swal(mensaje);
     }
   });
 
-  
+
 }
 
 $('#frmProductos_img_modificar').on('submit',function (e) {
-  
+
   e.preventDefault();
   var FrmData = new FormData(this);
   // alert();
@@ -569,12 +576,12 @@ $('#frmProductos_img_modificar').on('submit',function (e) {
           $('#iframe_producto_img').attr('src',`/img/items/${data.items.file_name}.${data.items.file_extension}`);
           // $('#iframe_producto_img').append(`<img height="100%" width="100%" src="/img/items/${data.items.file_name}.${data.items.file_extension}" alt="">`);
           $('#btnGuardarImagenProducto').attr('hidden',true);
-        
+
         },
         error: function () {
             mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->frmProductos_img_modificar";
             swal(mensaje);
-            
+
         }
       });
 
@@ -584,4 +591,3 @@ $('#frmProductos_img_modificar').on('submit',function (e) {
   });
 
 });
-

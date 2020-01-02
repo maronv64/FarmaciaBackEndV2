@@ -7,7 +7,7 @@
   <br>
   <div class="card">
     <table class="table table-sm">
-      <thead>
+      <thead id="tabla_reporte_head">
         <tr>
           <th scope="col">#</th>
           <th scope="col">First</th>
@@ -15,7 +15,7 @@
           <th scope="col">Handle</th>
         </tr>
       </thead>
-      <tbody id="tablaVentas_reporte">
+      <tbody id="tabla_reporte_body">
         <tr>
           <th scope="row">1</th>
           <td>Mark</td>
