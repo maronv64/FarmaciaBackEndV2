@@ -251,7 +251,7 @@ class TipoUsuarioController extends Controller
             } else {
 
                 $code = '200';
-                $items = TipoUsuario::where([["estado_del","1"],["descripcion","like","%$request->value%"]])->get();
+                $items = TipoUsuario::withCount('usuarios')->where([["estado_del","1"],["descripcion","like","%$request->value%"]])->get();
                 $message = 'OK';      
                       
             }

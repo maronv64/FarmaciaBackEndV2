@@ -155,8 +155,11 @@ function crear_tablaVentas_v2(data) {
 
                   var html = `
                     <button type="button" class="btn btn-sm btn-outline-info" onclick="ventas_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-eye" aria-hidden="true"></i></button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="ventas_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                   `;
+                  // var html = `
+                  //   <button type="button" class="btn btn-sm btn-outline-info" onclick="ventas_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  //   <button type="button" class="btn btn-sm btn-outline-secondary" onclick="ventas_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  // `;
 
                   return `${html}`;
                   // return `<button>hola</button>`;

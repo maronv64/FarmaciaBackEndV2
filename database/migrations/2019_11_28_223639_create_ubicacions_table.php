@@ -15,7 +15,7 @@ class CreateUbicacionsTable extends Migration
     {
         Schema::create('ubicacions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('idusuario');
+            $table->unsignedBigInteger('idusuario');
             $table->string('longitud');
             $table->string('latitud');
             $table->string('descripcion')->nullable();
@@ -24,6 +24,8 @@ class CreateUbicacionsTable extends Migration
             $table->string('nome_token');
 
             $table->timestamps();
+
+            $table->foreign('idusuario')->references('id')->on('users');
         });
     }
 

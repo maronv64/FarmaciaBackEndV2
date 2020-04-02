@@ -160,6 +160,7 @@ class UserController extends Controller
         $message ='';
         $items ='';
 
+
         if (empty($nome_token_user)) {
 
             $code='403';
@@ -174,7 +175,7 @@ class UserController extends Controller
                 //no existe ese usuarios o fue dado de baja.
             } else {
 
-                $code = '200';
+               
 
                 $items = User::where("nome_token",$request->nome_token)->first();
                 try {
@@ -187,23 +188,23 @@ class UserController extends Controller
 
                 }
                 try {
-
+                    $items->name = $request->name;
+                    $items->celular = $request->celular;
+                    $items->password = bcrypt($request->password);
+                    $items->password2 = $request->password;
+                    $items->update();
+  
+                    $message = 'OK';
                 } catch (\Exception $e) {
 
-                  $items->name = $request->name;
-                  $items->celular = $request->celular;
-                  $items->password = bcrypt($request->password);
-                  $items->password2 = $request->password;
-                  $items->update();
-
-                  $message = 'OK';
 
                 }
+                $code = '200';
 
             }
 
         }
-
+        //$items = $request;
         $result =   array(
                         'items'     => $items,
                         'code'      => $code,
@@ -270,6 +271,9 @@ class UserController extends Controller
         $code='';
         $message ='';
         $items ='';
+
+        // return  $items = User::with('tipo')->withCount('ventas_client','ventas_courier')->where([["estado_del","1"],["name","like","%$request->value%"]])->orderBy('name', 'desc')->get();
+
 
         if (empty($nome_token_user)) {
 

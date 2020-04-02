@@ -236,7 +236,8 @@ class ProductoController extends Controller
         $code='';
         $message ='';
         $items ='';
-
+        // $items = Producto::where("id_foraneo",$request->nome_token)->withCount('detalle_ventas')->first();
+        // return $items;
         if (empty($nome_token_user)) {
 
             $code='403';
@@ -251,10 +252,20 @@ class ProductoController extends Controller
                 //no existe ese usuarios o fue dado de baja.
             } else {
 
-                $code = '200';
-                $items = Producto::where("id_foraneo",$request->nome_token)->first();
-                $items->estado_del='0';
-                $items->update();
+                
+                $items = Producto::where("id_foraneo",$request->nome_token)->withCount('detalle_ventas')->first();
+                
+                if ($items['detalle_ventas_count']==0) {
+                    $code = '200';
+                    $items->delete();
+                } else {
+                    $items->estado_del='0';
+                    $items->update();
+                }
+                
+
+                // $items->estado_del='0';
+                // $items->update();
                 $message = 'OK';
 
             }
@@ -282,6 +293,9 @@ class ProductoController extends Controller
         $message ='';
         $items ='';
 
+        //$items = Producto::withCount('detalle_ventas')->get();
+        
+        //return $items;
         // $items = Producto::where([["estado_del","1"],["descripcion","like","%$request->nome_token%"]])->get();
         // return response()->json($items);
 
@@ -300,7 +314,7 @@ class ProductoController extends Controller
             } else {
 
                 $code = '200';
-                $items = Producto::where([["estado_del","1"],['cantidad','>','0'],["descripcion","like","%$request->nome_token%"]])->orderBy('created_at','desc')->get();
+                $items = Producto::where([["estado_del","1"],['cantidad','>','0'],["descripcion","like","%$request->nome_token%"]])->withCount('detalle_ventas')->orderBy('created_at','desc')->get();
                 $message = 'OK';
 
             }

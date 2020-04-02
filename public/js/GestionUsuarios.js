@@ -152,10 +152,39 @@ function crear_tablaUsuarios_2(data) {
               width:ancho,
               data: null,
               render: function (data, type, row) {
-                var html = `
-                  <button type="button" class="btn btn-sm btn-outline-info" onclick="usuarios_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                `;
+
+                var html='';
+                var todo = false;
+                if (data.tipo.cod=='003') { //courier
+                  if (data.ventas_courier_count==0) {
+                    todo = true;
+                  } else {
+                    todo = false;
+                  }
+                } else if( data.tipo.cod =='004' ) { //client
+                  if (data.ventas_client_count==0) {
+                    todo = true;
+                  } else {
+                    todo = false;
+                  }
+                }
+
+                if (todo==true) {
+                  html = `
+                    <button type="button" class="btn btn-sm btn-outline-info" onclick="usuarios_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  `;
+                } else {
+                  html = `
+                    <button type="button" class="btn btn-sm btn-outline-info" onclick="usuarios_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                  `;
+                }
+                
+                
+                // html = `
+                //   <button type="button" class="btn btn-sm btn-outline-info" onclick="usuarios_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                //   <button type="button" class="btn btn-sm btn-outline-secondary" onclick="usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                // `;
 
                 return `${html}`;
                 // return `<button>hola</button>`;

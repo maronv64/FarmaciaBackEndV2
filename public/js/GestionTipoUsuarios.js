@@ -57,6 +57,7 @@ function crear_tablaTipoUsuarios(data) {
 }
 function crear_tablaTipoUsuarios_v2(data) {
   var ancho = '50%';
+  
   $('#tablaTipoUsuarios_padre').html('');
   $('#tablaTipoUsuarios').html('');
 
@@ -101,10 +102,24 @@ function crear_tablaTipoUsuarios_v2(data) {
               data: null,
               render: function (data, type, row) {
 
-                var html = `
-                <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}','${data.descripcion}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                `;
+                var html = '';
+
+                if (data.usuarios_count==0) {
+                  html = `
+                    <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}','${data.descripcion}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  `;
+                } else {
+                  html = `
+                    <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}','${data.descripcion}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                  `;
+                }
+                
+                
+                // html = `
+                // <button type="button" class="btn btn-sm btn-outline-info" onclick="tipo_usuarios_ver('${data.nome_token}','${data.descripcion}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                // <button type="button" class="btn btn-sm btn-outline-secondary" onclick="tipo_usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                // `;
 
                 return `${html}`;
                 // return `<button>hola</button>`;
@@ -114,6 +129,8 @@ function crear_tablaTipoUsuarios_v2(data) {
       ],
 /////////////////////////////////////////////////////////////////////////////////////
   });
+  
+  
 }
 function tipo_usuarios_ver(nome_token,_descripcion) {
 	// console.log(_descripcion);

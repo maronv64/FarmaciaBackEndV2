@@ -39,7 +39,22 @@
       .barra{
         background:#b9007f;
         color: #fff;
+        /* width:  */
       }
+
+      .maxWidth{
+          width: 100% !important;
+      }
+
+      /* #iframe_producto_img{
+        text-align: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        } */
+
     </style>
 
 </head>

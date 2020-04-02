@@ -43,4 +43,10 @@ class User extends Authenticatable
     public function ubicacion(){
         return $this->hasMany('App\Ubicacion','idusuario','id');
     }
+    public function ventas_client(){
+        return $this->hasMany('App\Venta','idcliente','id');
+    }
+    public function ventas_courier(){
+        return $this->hasMany('App\Venta','idcourier','id');
+    }
 }
