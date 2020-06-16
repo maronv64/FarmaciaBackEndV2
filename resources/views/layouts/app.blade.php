@@ -26,6 +26,7 @@
     {{--<link href="{{ asset('css/bootstrap-toggle.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/w3school-toggle.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('animate.css/animate.css') }}" rel="stylesheet">--}}
 
     <style media="screen">
       .botones{
@@ -46,6 +47,9 @@
           width: 100% !important;
       }
 
+    .fondo1{
+        background: #dee8df;
+    }
       /* #iframe_producto_img{
         text-align: center;
         position: absolute;
@@ -70,10 +74,10 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand text-white" href="{{ url('/home') }}">
+                <strong><a class="navbar-brand text-white" href="{{ url('/home') }}">
                   <img style="width:25px" src="{{asset('img/logo3.png')}}" alt="">
                     {{ "Farmacias Cruz Azul" }}
-                </a>
+                </a></strong>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -89,7 +93,7 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <strong><a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a></strong>
                             </li>
                             {{--@if (Route::has('register'))
                                 <li class="nav-item">
@@ -98,22 +102,22 @@
                             @endif--}}
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                              <a style="color:white" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                  <strong>{{ Auth::user()->name }}</strong> <span class="caret"></span>
+                              </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ 'Salir' }}
-                                    </a>
+                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="{{ route('logout') }}"
+                                     onclick="event.preventDefault();
+                                                   document.getElementById('logout-form').submit();">
+                                      {{ 'Salir' }}
+                                  </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                      @csrf
+                                  </form>
+                              </div>
+
                             </li>
                         @endguest
                     </ul>
@@ -125,6 +129,7 @@
             @yield('content')
         </main>
     </div>
+    
     @yield('scripts')
 </body>
 </html>

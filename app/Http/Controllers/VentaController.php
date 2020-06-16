@@ -259,7 +259,7 @@ class VentaController extends Controller
                   $items = Venta::where("nome_token",$request->nome_token)->first();
                   $items->estado_del='0';
                   $items->update();
-                  $message = 'OK';  
+                  $message = 'OK';
                 }
 
 
@@ -278,11 +278,11 @@ class VentaController extends Controller
 
     public function Filtro($nome_token_user='',Request $request)
     {
-        // $items = Venta::with('estado','cliente','courier','detalle')->get();
-        // $consulta = array (
-        //     'items' => $items,
-        // );
-        //return  response()->json($request);
+        // if (empty($request['valueInicio'])) {
+        //   return 1;
+        // }else{
+        //   return 0;
+        // }
 
         $code='';
         $message ='';
@@ -302,13 +302,40 @@ class VentaController extends Controller
                 //no existe ese usuarios o fue dado de baja.
             } else {
 
-                $code = '200';
-                if ($request->value2=='ventas') {
-                    $estado = EstadoVenta::where([['cod','001']])->first();
+                if ($request->value2=='ventas') { //validar si es una venta
+                  $code = '200';
+                  $estado = EstadoVenta::where([['cod','001']])->first(); // se obtiene el tipo de venta con el cod 001 que corresponde a las ventas
+                  if (empty($request['valueInicio']) ) { // no existe fecha de iniico , consultar todos
                     $items = Venta::with('estado','cliente','courier','detalle')->where([["estado_del","1"],["idestado","<>","$estado->id"],["fecha","like","%$request->value%"]])->get();
+                  } else {
+                    if (empty($request['valueFin'])) { //no existe fecha de fin
+                      $items = Venta::with('estado','cliente','courier','detalle')->where([["estado_del","1"],["idestado","<>","$estado->id"],["fecha",">=","%$request->valueInicio%"]])->get();
+                    } else {
+                          $items = Venta::with('estado','cliente','courier','detalle')->where([["estado_del","1"],["idestado","<>","$estado->id"],["fecha",">=","%$request->valueInicio%"],["fecha","<=","%$request->valueFin%"]])->get();
+                    }
+                  }
+
+
                 } else if($request->value2=='pedidos'){
                     $estado = EstadoVenta::where([['cod','001']])->first();
-                    $items = Venta::with('estado','cliente','courier','detalle')->where([["estado_del","1"],["idestado","$estado->id"],["fecha","like","%$request->value%"]])->get();
+                    if (empty($request['valueInicio']) ) {
+                      //convertir valueInicio en formato mysql 
+                      $items = Venta::with('estado','cliente','courier','detalle')->where([["estado_del","1"],["idestado","$estado->id"],["fecha","like","%$request->value%"]])->get();
+                    } else {
+                      if (empty($request['valueFin'])) {
+                        $items = Venta::with('estado','cliente','courier','detalle')->where([["estado_del","1"],["idestado","$estado->id"],["fecha",">=","%$request->valueInicio%"]])->get();
+                      }else{
+                        $items = Venta::with('estado','cliente','courier','detalle')->where([["estado_del","1"],["idestado","$estado->id"],["fecha",">=","%$request->valueInicio%"],["fecha","<=","%$request->valueFin%"]])->get();
+
+                      }
+                    }
+                    // if (empty($request->valueInicio)) {
+                    //   if (empty($request->valueFin)) {
+                    //
+                    //   }else{
+                    //   }
+                    // }else{
+                    // }
                 }
 
                 //dd($items);

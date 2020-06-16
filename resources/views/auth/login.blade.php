@@ -4,8 +4,8 @@
 <div class="container">
     <br>
     <div class="row justify-content-center">
-        <div class="col-md-5">
-            <div class="card" >
+        <div class="col-sm-10 col-md-7 col-lg-5">
+            <div class="card fondo1" style="border-radius: 2rem; border-color: silver">
                 {{--<div class="card-header">{{ __('Login') }}</div>--}}
 
                 <div class="card-body">
@@ -68,7 +68,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="submit" class="btn btn-primary btn-block" >
                                     {{ __('Login') }}
                                 </button>
 

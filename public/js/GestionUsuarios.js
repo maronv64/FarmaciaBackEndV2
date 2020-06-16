@@ -57,7 +57,7 @@ function cargar_tablaUsuarios(value='') {
     data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
-      //console.log(data);
+      console.log('let usuarios:',data);
       // crear_tablaUsuarios(data);
       crear_tablaUsuarios_2(data.items);
     },
@@ -99,7 +99,7 @@ function crear_tablaUsuarios_2(data) {
   var ancho = '16%';
   $('#tablaUsuarios_padre').html('');
   $('#tablaUsuarios').html('');
-  
+
   $('#tablaUsuarios_padre').DataTable({
 /////////////////////////////////////////////////////////////////////////////////////
       destroy: true,
@@ -179,8 +179,8 @@ function crear_tablaUsuarios_2(data) {
                     <button type="button" class="btn btn-sm btn-outline-info" onclick="usuarios_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
                   `;
                 }
-                
-                
+
+
                 // html = `
                 //   <button type="button" class="btn btn-sm btn-outline-info" onclick="usuarios_ver('${data.nome_token}')" data-toggle="modal" ><i class="fa fa-pencil" aria-hidden="true"></i></button>
                 //   <button type="button" class="btn btn-sm btn-outline-secondary" onclick="usuarios_eliminar('${data.nome_token}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
