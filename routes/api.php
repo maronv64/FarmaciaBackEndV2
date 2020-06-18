@@ -32,7 +32,7 @@ Route::group([
     
     Route::get('/hola',function()
     {
-        return response()->json("hola");
+        return response()->json("hola"); 
     });
  
     //TIPOS DE USUARIOS-----------------------------------------------------------------------------------------------------------------------
