@@ -30,7 +30,7 @@ Route::group([
     {
         return response()->json("hola");
     });
-
+ 
     //TIPOS DE USUARIOS-----------------------------------------------------------------------------------------------------------------------
 // Route::resource('/v0/tipo_usuarios','TipoUsuarioController');
 Route::post('/v0/tipo_usuarios_store/{nome_token_user?}/{data?}','TipoUsuarioController@store')->name('api.v0.tipo_usuarios.store');
