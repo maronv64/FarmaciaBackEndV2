@@ -12,20 +12,26 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-header('Access-Control-Allow-Origin: *'); 
-header("Access-Control-Allow-Credentials: true");
+// header('Access-Control-Allow-Origin: *'); 
+// header("Access-Control-Allow-Credentials: true");
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-//ProductosJs
-Route::get('/v0/produtosjs', function () {
-    // return echo "" . asset('/js/itemsBodega.js');
-    echo "hola";// storage_path('app/public');
-});
+Route::group([
 
-//TIPOS DE USUARIOS-----------------------------------------------------------------------------------------------------------------------
+    'middleware' => ['cors','api'],
+    'prefix'     => 'auth'
+], function ($router)
+{
+    
+    Route::get('/v0/hola',function()
+    {
+        return response()->json("hola");
+    });
+
+    //TIPOS DE USUARIOS-----------------------------------------------------------------------------------------------------------------------
 // Route::resource('/v0/tipo_usuarios','TipoUsuarioController');
 Route::post('/v0/tipo_usuarios_store/{nome_token_user?}/{data?}','TipoUsuarioController@store')->name('api.v0.tipo_usuarios.store');
 Route::get('/v0/tipo_usuarios_show/{nome_token_user?}/{data?}','TipoUsuarioController@show')->name('api.v0.tipo_usuarios.show');
@@ -98,3 +104,12 @@ Route::get('/v0/pdf', function () {
    return $pdf->stream();
 //    return $pdf->download();
 });
+
+});
+
+//ProductosJs
+// Route::get('/v0/produtosjs', function () {
+//     // return echo "" . asset('/js/itemsBodega.js');
+//     echo "hola";// storage_path('app/public');
+// });
+
