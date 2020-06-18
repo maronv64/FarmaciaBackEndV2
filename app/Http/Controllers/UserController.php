@@ -175,7 +175,7 @@ class UserController extends Controller
                 //no existe ese usuarios o fue dado de baja.
             } else {
 
-               
+
 
                 $items = User::where("nome_token",$request->nome_token)->first();
                 try {
@@ -193,7 +193,7 @@ class UserController extends Controller
                     $items->password = bcrypt($request->password);
                     $items->password2 = $request->password;
                     $items->update();
-  
+
                     $message = 'OK';
                 } catch (\Exception $e) {
 
@@ -265,6 +265,7 @@ class UserController extends Controller
     public function Filtro($nome_token_user='',Request $request)
     //public function Filtro($value='')
     {
+      // return $request;
         // $items = User::with('tipo')->where([["estado_del","1"]])->first();//->orderBy('name', 'desc')->get();
 
 
@@ -290,7 +291,16 @@ class UserController extends Controller
             } else {
 
                 $code = '200';
-                $items = User::with('tipo')->where([["estado_del","1"],["name","like","%$request->value%"]])->orderBy('name', 'desc')->get();
+                if (empty($request['valueTipoFiltro'])) {
+                  $items = User::with('tipo')->where([["estado_del","1"],["name","like","%$request->value%"]])->orderBy('name', 'desc')->get();
+                } else {
+                  if ($request['valueTipoFiltro']=='xtipo') {
+                    $tipo = \App\TipoUsuario::where('nome_token',$request['value'])->first();
+                    $items = User::with('tipo')->where([["estado_del","1"],["idtipo",$tipo->id]])->orderBy('name', 'desc')->get();
+                  }
+
+                }
+
                 $message = 'OK';
 
             }
@@ -375,7 +385,7 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-      $code='';
+      $code='200';
       $message ='';
       $items ='';
       //

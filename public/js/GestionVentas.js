@@ -22,7 +22,7 @@ function cargar_tablaVentas(value='') {
     data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
     success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
     {
-
+        console.log("ventas:",data);
         // crear_tablaVentas(data);
         crear_tablaVentas_v2(data.items);
     },

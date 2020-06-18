@@ -65,10 +65,10 @@ class TipoUsuarioController extends Controller
                 $items->descripcion = $request->descripcion;
                 $items->estado_del = '1';
                 $items->nome_token = str_replace($ignorar,"",bcrypt(Str::random(10)));
-                $items->save();  
+                $items->save();
 
-                $message = 'OK';      
-                      
+                $message = 'OK';
+
             }
 
         }
@@ -78,8 +78,8 @@ class TipoUsuarioController extends Controller
                         'code'      => $code,
                         'message'   => $message
                     );
-            
-        return response()->json($result);     
+
+        return response()->json($result);
     }
 
     /**
@@ -111,8 +111,8 @@ class TipoUsuarioController extends Controller
 
                 $code = '200';
                 $items = TipoUsuario::where("nome_token",$request->nome_token)->first();
-                $message = 'OK';      
-                      
+                $message = 'OK';
+
             }
 
         }
@@ -122,7 +122,7 @@ class TipoUsuarioController extends Controller
                         'code'      => $code,
                         'message'   => $message
                     );
-            
+
         return response()->json($result);
     }
 
@@ -169,8 +169,8 @@ class TipoUsuarioController extends Controller
                 $items = TipoUsuario::where("nome_token",$request->nome_token)->first();
                 $items->descripcion = $request->descripcion;
                 $items->update();
-                $message = 'OK';      
-                      
+                $message = 'OK';
+
             }
 
         }
@@ -180,7 +180,7 @@ class TipoUsuarioController extends Controller
                         'code'      => $code,
                         'message'   => $message
                     );
-            
+
         return response()->json($result);
     }
 
@@ -214,8 +214,8 @@ class TipoUsuarioController extends Controller
                 $items = TipoUsuario::where("nome_token",$request->nome_token)->first();
                 $items->estado_del='0';
                 $items->update();
-                $message = 'OK';      
-                      
+                $message = 'OK';
+
             }
 
         }
@@ -225,8 +225,8 @@ class TipoUsuarioController extends Controller
                         'code'      => $code,
                         'message'   => $message
                     );
-            
-        return response()->json($result);        
+
+        return response()->json($result);
     }
 
     public function Filtro($nome_token_user='',Request $request)
@@ -244,16 +244,21 @@ class TipoUsuarioController extends Controller
 
         }else{
 
-            $validad = User::where('nome_token',$nome_token_user)->first();
+            $validad = User::with('tipo')->where('nome_token',$nome_token_user)->first();
 
             if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
                 //no existe ese usuarios o fue dado de baja.
             } else {
 
                 $code = '200';
-                $items = TipoUsuario::withCount('usuarios')->where([["estado_del","1"],["descripcion","like","%$request->value%"]])->get();
-                $message = 'OK';      
-                      
+                if ($validad['tipo']['cod']=='001') {
+                  $items = TipoUsuario::withCount('usuarios')->where([["estado_del","1"],["descripcion","like","%$request->value%"]])->get();
+                } else {
+                  $items = TipoUsuario::withCount('usuarios')->where([["estado_del","1"],["cod","<>","001"],["descripcion","like","%$request->value%"]])->get();
+                }
+
+                $message = 'OK';
+
             }
 
         }
@@ -263,7 +268,7 @@ class TipoUsuarioController extends Controller
                         'code'      => $code,
                         'message'   => $message
                     );
-            
+
         return response()->json($result);
     }
 

@@ -20,14 +20,13 @@ function GP_cargarTablaProductosBodega_2(last=0,filtro='') {
       data: FrmData,               // Datos enviaráados al servidor, un conjunto de pares clave / valor (es decir, campos de formulario y valores)
       success: function (data)   // Una función a ser llamada si la solicitud tiene éxito
       {
-        //console.log(data);
+        console.log(data);
 
         GP_crearTablaProductosBodega_v2(data);
       },
       error: function (error) {
         console.log(error);
-
-          mensaje = "OCURRIO UN ERROR : Archivo->GestionProductos.js , funcion->GP_cargarTablaProductosBodega_2()";
+          mensaje = "OCURRIO UN ERROR : Archivo->GestionProductosJSON.js , funcion->GP_cargarTablaProductosBodega_2()";
           swal(mensaje);
       }
   });
@@ -232,7 +231,7 @@ function GP_agregar_producto(id_foraneo) {
           // console.log(data);
         },
         error: function () {
-            mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->GP_agregar_producto()";
+            mensaje = "OCURRIO UN ERROR: Archivo->GestionProductosJSON.js , funcion->GP_agregar_producto()";
             swal(mensaje);
             $(`#checkbox_${id_foraneo}`).prop("checked", false );
         }
@@ -282,7 +281,7 @@ function GP_eliminar_producto(id_foraneo) {
           // console.log(data);
         },
         error: function () {
-            mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->GP_eliminar_producto()";
+            mensaje = "OCURRIO UN ERROR: Archivo->GestionProductosJSON.js , funcion->GP_eliminar_producto()";
             swal(mensaje);
             $(`#checkbox_${id_foraneo}`).prop("checked", false );
         }
@@ -326,7 +325,7 @@ function GP_cargar_lista_productos(nome_token) {
 
     },
     error: function () {
-        mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->GP_cargar_lista_productos()";
+        mensaje = "OCURRIO UN ERROR: Archivo->GestionProductosJSON.js , funcion->GP_cargar_lista_productos()";
         swal(mensaje);
     }
   });
@@ -463,7 +462,7 @@ function GP_preview_producto_img(id_foraneo) {
     error: function () {
       $('#iframe_producto_img').attr('src',`/img/fondo3.jpg`);
 
-        // mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->GP_preview_producto_img()";
+        // mensaje = "OCURRIO UN ERROR: Archivo->GestionProductosJSON.js , funcion->GP_preview_producto_img()";
         // swal(mensaje);
     }
   });
@@ -511,7 +510,7 @@ $('#frmProductos_img_modificar').on('submit',function (e) {
 
         },
         error: function () {
-            mensaje = "OCURRIO UN ERROR: Archivo->GestionProductos.js , funcion->frmProductos_img_modificar";
+            mensaje = "OCURRIO UN ERROR: Archivo->GestionProductosJSON.js , funcion->frmProductos_img_modificar";
             swal(mensaje);
 
         }
