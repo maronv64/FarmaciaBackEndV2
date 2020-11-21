@@ -245,7 +245,8 @@ class TipoUsuarioController extends Controller
         }else{
 
             $validad = User::with('tipo')->where('nome_token',$nome_token_user)->first();
-
+            $items = TipoUsuario::withCount('usuarios')->where([["estado_del","1"],["descripcion","like","%$request->value%"]])->get();
+            $message = 'OK';
             if (empty($validad['name'])|| $validad['estado_del']=='0' ) {
                 //no existe ese usuarios o fue dado de baja.
             } else {

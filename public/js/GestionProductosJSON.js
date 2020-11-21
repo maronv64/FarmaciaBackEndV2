@@ -1,6 +1,6 @@
 // // var apiProductos = "http://192.168.137.1:8080/FarmaciaApis/public/"
 // var apiProductos = "http://localhost:8080/FarmaciaApis/public/"
-var urlApi = "http://localhost:8000/itemsBodega.json";
+var urlApi = "/itemsBodega.json";
 
 
 function GP_cargarTablaProductosBodega_2(last=0,filtro='') {

@@ -59,12 +59,12 @@
         "version_normalized": "0.11.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/barryvdh/laravel-cors.git",
+            "url": "https://github.com/fruitcake/laravel-cors.git",
             "reference": "03492f1a3bc74a05de23f93b94ac7cc5c173eec9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/barryvdh/laravel-cors/zipball/03492f1a3bc74a05de23f93b94ac7cc5c173eec9",
+            "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/03492f1a3bc74a05de23f93b94ac7cc5c173eec9",
             "reference": "03492f1a3bc74a05de23f93b94ac7cc5c173eec9",
             "shasum": ""
         },
@@ -1068,7 +1068,8 @@
                 "name": "Jakub Onderka",
                 "email": "jakub.onderka@gmail.com"
             }
-        ]
+        ],
+        "abandoned": "php-parallel-lint/php-console-color"
     },
     {
         "name": "jakub-onderka/php-console-highlighter",
@@ -1116,7 +1117,8 @@
                 "homepage": "http://www.acci.cz/"
             }
         ],
-        "description": "Highlight PHP code in terminal"
+        "description": "Highlight PHP code in terminal",
+        "abandoned": "php-parallel-lint/php-console-highlighter"
     },
     {
         "name": "laravel/framework",
@@ -3846,6 +3848,68 @@
         ],
         "description": "Library that helps with managing the version number of Git-hosted PHP projects",
         "homepage": "https://github.com/sebastianbergmann/version"
+    },
+    {
+        "name": "spatie/laravel-cors",
+        "version": "1.6.0",
+        "version_normalized": "1.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/spatie/laravel-cors.git",
+            "reference": "d74099d57821d5a72ae21416c0be0dcd58779355"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/spatie/laravel-cors/zipball/d74099d57821d5a72ae21416c0be0dcd58779355",
+            "reference": "d74099d57821d5a72ae21416c0be0dcd58779355",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
+            "php": "^7.2"
+        },
+        "require-dev": {
+            "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*|^4.0",
+            "phpunit/phpunit": "^8.0"
+        },
+        "time": "2019-09-04T06:55:15+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Spatie\\Cors\\CorsServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Spatie\\Cors\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Freek Van der Herten",
+                "email": "freek@spatie.be",
+                "homepage": "https://spatie.be",
+                "role": "Developer"
+            }
+        ],
+        "description": "Send CORS headers in a Laravel or Lumen application",
+        "homepage": "https://github.com/spatie/laravel-cors",
+        "keywords": [
+            "ajax",
+            "api",
+            "cors",
+            "laravel-cors",
+            "request",
+            "spatie"
+        ],
+        "abandoned": "laravel/framework"
     },
     {
         "name": "swiftmailer/swiftmailer",
